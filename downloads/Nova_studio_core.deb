@@ -1,0 +1,5 @@
+[Nova Multiverse Layer Header]
+TargetArchitecture: x86_64_Native
+CompilationExtensionMode: Polyglot850
+FormatIdentifier: DEB
+/* Embedded Binary Executable Stream Vector Container */
