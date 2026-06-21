@@ -47,7 +47,6 @@ class NovaEngine:
             var_name = parts[0].strip()
             var_val = parts[1].strip()
             try:
-                # Builtins स्कोप को ग्लोबल लेवल पर बाइंड किया
                 self.variables[var_name] = eval(var_val, {"__builtins__": __builtins__}, self.variables)
             except:
                 if (var_val.startswith('"') and var_val.endswith('"')) or (var_val.startswith("'") and var_val.endswith("'")):
@@ -57,8 +56,23 @@ class NovaEngine:
 
         elif l.startswith("NOVA.output"):
             try:
-                content = l.split("(")[1].rstrip(")")
-                # यहाँ __builtins__ डालने से str(), int() सब कुछ नोवा के अंदर लाइव काम करेगा
+                # ब्रैकेट के अंदर का पूरा माल निकालो
+                content = l[12:-1].strip()
+                
+                # अगर कोट्स का झंझट है (प्लस साइन के साथ), तो उसे f-string स्टाइल में बदल दो
+                if "+" in content and ('"' in content or "'" in content):
+                    # प्लस और कोट्स हटाकर वेरिएबल्स को {} में डालो
+                    # जावा/पायथन हाइब्रिड पार्सर: थेट इवैल्यूएशन विथ वैरिएबल रिप्लेसमेंट
+                    for var in list(self.variables.keys()):
+                        if f"str({var})" in content:
+                            content = content.replace(f"str({var})", f"{{{var}}}")
+                        elif var in content and not f'"{var}"' in content and not f"'{var}'" in content:
+                            # सिंपल वेरिएबल्स को भी ट्रैक करो
+                            content = re.sub(r'\b' + var + r'\b', f"{{{var}}}", content)
+                    
+                    content = content.replace("+", "").replace('"', '').replace("'", "").strip()
+                    content = f'f"{content}"'
+                
                 global_env = {"__builtins__": __builtins__}
                 global_env.update(self.variables)
                 result = eval(content, global_env, {})
@@ -68,7 +82,8 @@ class NovaEngine:
                 else:
                     print(f"{C_STRING}{result}{RESET}")
             except Exception:
-                content_clean = content.strip().replace('"', '').replace("'", "")
+                # फॉलबैक: अगर कुछ भी काम न करे तो सीधा वेरिएबल ढूंढो
+                content_clean = l[12:-1].strip().replace('"', '').replace("'", "")
                 if content_clean in self.variables:
                     val = self.variables[content_clean]
                     if isinstance(val, (int, float)):
@@ -76,11 +91,11 @@ class NovaEngine:
                     else:
                         print(f"{C_STRING}{val}{RESET}")
                 else:
-                    print(f"{C_ERR}RuntimeError: Unresolved token header{RESET}")
+                    print(f"{C_ERR}RuntimeError: Mismatched syntax token layer{RESET}")
 
     def start_repl(self):
         current_date = datetime.datetime.now().strftime("%b %d %Y, %H:%M:%S")
-        print(f"Nova 3.5.0 Core Compiler (tags/master:233fa0d, {current_date})")
+        print(f"Nova 3.5.0 Core Compiler (tags/master:98d08f4, {current_date})")
         print(f"[Clang 16.0.6 (Android Termux Shared Build)] on linux")
         print("Type \"help\", \"copyright\" or \"credits\" for more information.")
         print("Use \"RUN\" on a blank line to execute buffered blocks.\n")
@@ -88,6 +103,7 @@ class NovaEngine:
         buffer = []
         while True:
             try:
+                import re
                 prompt = f"{C_PROMPT}>>> {RESET}" if not buffer else ""
                 user_input = input(prompt)
                 
