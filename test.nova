@@ -1,7 +1,20 @@
-// नोवा स्टूडियो - अल्टीमेट कमर्शियल स्क्रिप्ट टेस्ट
-NOVA.package("nova.voice.core")
-NOVA.package("pip:network_scanner")
-NOVA.ai("Verify memory buffer leaks on heap allocation")
-NOVA.allocate(hack_target = "192.168.1.1")
-NOVA.output("All Systems Operational. Database Encrypted.")
+// नोवा स्टूडियो - 100% कम्प्लीट महा-पॉलीग्लॉट स्क्रिप्ट टेस्ट
+NOVA.mode("Production Engine")
+NOVA.package("core.math.v2")
+NOVA.error_heal
+
+// नंबर वेरिएबल्स एलोकेशन और मैथ ऑपरेशंस (Step 5)
+NOVA.allocate(base_value = 100)
+NOVA.allocate(modifier_value = 50)
+NOVA.allocate(final_result = base_value + modifier_value)
+
+NOVA.output("--- Math Calculation Result from RAM Core ---")
+NOVA.output(final_result)
+
+// यूजर लाइव हार्डवेयर इनपुट (Step 4)
+NOVA.allocate(user_input_node = 0)
+NOVA.input(user_input_node)
+
+NOVA.output("--- Output Received from User input ---")
+NOVA.output(user_input_node)
 

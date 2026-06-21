@@ -1,0 +1,8 @@
+{
+    "scopeName": "source.nova",
+    "patterns": [
+        { "name": "keyword.control.nova", "match": "\\b(NOVA\\.mode|NOVA\\.package|NOVA\\.error_heal|NOVA\\.allocate|NOVA\\.input|NOVA\\.output|NOVA\\.shell|NOVA\\.repeat|NOVA\\.end_repeat)\\b" },
+        { "name": "comment.line.double-slash.nova", "match": "//.*$" },
+        { "name": "string.quoted.double.nova", "match": "\".*?\"" }
+    ]
+}

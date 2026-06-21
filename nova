@@ -1,0 +1,5 @@
+#!/usr/bin/env python3
+import sys, os
+if len(sys.argv) < 2: print("Usage: nova <file.nova>"); sys.exit(1)
+from finalize_master_language import NovaUltimateCompiler
+NovaUltimateCompiler(sys.argv[1]).compile()
