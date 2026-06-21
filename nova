@@ -2,7 +2,7 @@
 import sys
 import datetime
 
-# Premium Standard Colors (100% Italicized Theme)
+# Premium VS Code Style Colors (100% Italicized Theme)
 C_PROMPT = "\033[3;35m"   # Purple
 C_OUT = "\033[3;32m"      # Soft Green
 C_SYS = "\033[3;36m"      # Cyan
@@ -27,18 +27,31 @@ class NovaEngine:
             except:
                 print(f"{C_ERR}SyntaxError: Invalid mode format{RESET}")
 
-        elif l.startswith("NOVA.ai_predict"):
+        # 1. LIVE INTERACTIVE AI METHOD (Asks for User Input Natively)
+        elif l.startswith("NOVA.ai_chat"):
             try:
-                query = l.split("(")[1].split(")")[0].replace('"', '').replace("'", "")
-                print(f"{C_SYS}[compiler-ai] evaluating tokens...{RESET}")
+                # यूजर से लाइव इनपुट मांगना
+                print(f"{C_SYS}[nova-ai] Initializing neural prompt layer...{RESET}")
+                user_query = input(f"{C_SYS}nova-ai (query) > {RESET}")
                 
-                # डायनेमिक फ्लेक्सिबल कीवर्ड मैपिंग
-                score = self.variables.get("current_score", 0)
-                threshold = self.variables.get("model_threshold", 0)
+                if not user_query.strip():
+                    print(f"{C_ERR}nova-ai > Input cannot be empty.{RESET}")
+                    return
+                    
+                print(f"{C_SYS}[nova-ai] thinking...{RESET}")
                 
-                print(f"{C_OUT}Analysis Metrics -> Query: '{query}' | Threshold: {threshold} | Score: {score}{RESET}")
-            except:
-                print(f"{C_ERR}RuntimeError: Subsystem compute failure{RESET}")
+                # लाइव इनपुट प्रोसेसिंग लॉजिक
+                q_lower = user_query.lower()
+                score = self.variables.get("current_score", 100)
+                
+                if "status" in q_lower or "check" in q_lower:
+                    print(f"{C_OUT}ai-response > Nodes active. Metrics index is at {score}. Protection level optimal.{RESET}")
+                elif "hello" in q_lower or "hi" in q_lower:
+                    print(f"{C_OUT}ai-response > Connection verified. Nova Human-Agent sync interface is live.{RESET}")
+                else:
+                    print(f"{C_OUT}ai-response > Core pattern matched. Log tokens cleared under execution block.{RESET}")
+            except (KeyboardInterrupt, EOFError):
+                print(f"\n{C_ERR}[nova-ai] Session interrupted.{RESET}")
 
         elif "=" in l and not l.startswith("NOVA."):
             parts = l.split("=")
@@ -64,29 +77,28 @@ class NovaEngine:
                 if content_clean in self.variables:
                     print(f"{C_OUT}{self.variables[content_clean]}{RESET}")
                 else:
-                    print(f"{C_ERR}RuntimeError: Unresolved expression token{RESET}")
+                    print(f"{C_ERR}RuntimeError: Unresolved token{RESET}")
 
     def start_repl(self):
         current_date = datetime.datetime.now().strftime("%b %d %Y, %H:%M:%S")
-        print(f"Nova 4.0.0 Architecture Core ({current_date})")
+        print(f"Nova 5.0.0 Architecture Core ({current_date})")
         print("[Clang 16.0.6 Native Termux Build] on linux")
         print("Type \"exit()\" to terminate session. Use \"RUN\" to execute blocks.\n")
         
         buffer = []
         while True:
             try:
-                # बफ़र फ्लश होने के बाद प्रॉम्प्ट हमेशा फ्रेश लाइन पर री-सेट होगा
                 prompt = f"{C_PROMPT}>>> {RESET}" if not buffer else ""
                 user_input = input(prompt)
                 
                 if user_input.strip() == "exit()":
                     break
-                
+                    
+                # पेस्टिंग को होल्ड करने का लॉजिक (डबल न्यूलाइन चेक)
                 if user_input.strip() == "RUN":
                     for block_line in buffer:
                         self.execute_line(block_line)
                     buffer = []
-                    # एग्जीक्यूशन खत्म होते ही बफ़र पूरी तरह साफ़
                     continue
                     
                 if user_input.strip():
