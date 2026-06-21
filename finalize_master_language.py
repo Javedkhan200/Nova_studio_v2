@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 import sys
 import datetime
+import re
 
 # Premium VS Code Dark+ Color Palette & 100% Italicized Matrix
 C_PROMPT = "\033[1;35m"   # Deep Purple for >>>
@@ -28,19 +29,25 @@ class NovaEngine:
             except:
                 print(f"{C_ERR}SyntaxError: Invalid mode format{RESET}")
 
+        # REAL DYNAMIC AI ENGINE (Processes your live variables)
         elif l.startswith("NOVA.ai_predict"):
             try:
                 query = l.split("(")[1].split(")")[0].replace('"', '').replace("'", "")
-                print(f"{C_MODE}[nova-ai] parsing neural shards...{RESET}")
-                q_lower = query.lower()
-                if "health" in q_lower or "system" in q_lower:
-                    print(f"{C_STRING}AI Response: All matrix nodes are running at 98.4% efficiency.{RESET}")
-                elif "weather" in q_lower or "temp" in q_lower:
-                    print(f"{C_STRING}AI Response: Climate matrix optimal. No network disruptions predicted.{RESET}")
+                print(f"{C_MODE}[nova-ai] analyzing live data shards...{RESET}")
+                
+                # मेमोरी से लाइव स्कोर और थ्रेशोल्ड उठाओ
+                score = self.variables.get("current_score", 0)
+                threshold = self.variables.get("model_threshold", 0)
+                
+                if "health" in query.lower() or "status" in query.lower():
+                    if score >= threshold:
+                        print(f"{C_STRING}AI Analysis: Score ({score}) is above threshold ({threshold}). System status: EXCELLENT.{RESET}")
+                    else:
+                        print(f"{C_ERR}AI Warning: Score ({score}) dropped below threshold ({threshold}). System status: CRITICAL.{RESET}")
                 else:
-                    print(f"{C_STRING}AI Response: Token identified. Pattern matches human sequence.{RESET}")
+                    print(f"{C_STRING}AI Response: Data verified. Model training matches user footprint.{RESET}")
             except:
-                print(f"{C_ERR}RuntimeError: AI Subsystem network drop{RESET}")
+                print(f"{C_ERR}RuntimeError: AI Subsystem compute failure{RESET}")
 
         elif "=" in l and not l.startswith("NOVA."):
             parts = l.split("=")
@@ -56,46 +63,31 @@ class NovaEngine:
 
         elif l.startswith("NOVA.output"):
             try:
-                # ब्रैकेट के अंदर का पूरा माल निकालो
                 content = l[12:-1].strip()
-                
-                # अगर कोट्स का झंझट है (प्लस साइन के साथ), तो उसे f-string स्टाइल में बदल दो
                 if "+" in content and ('"' in content or "'" in content):
-                    # प्लस और कोट्स हटाकर वेरिएबल्स को {} में डालो
-                    # जावा/पायथन हाइब्रिड पार्सर: थेट इवैल्यूएशन विथ वैरिएबल रिप्लेसमेंट
                     for var in list(self.variables.keys()):
                         if f"str({var})" in content:
                             content = content.replace(f"str({var})", f"{{{var}}}")
                         elif var in content and not f'"{var}"' in content and not f"'{var}'" in content:
-                            # सिंपल वेरिएबल्स को भी ट्रैक करो
                             content = re.sub(r'\b' + var + r'\b', f"{{{var}}}", content)
-                    
                     content = content.replace("+", "").replace('"', '').replace("'", "").strip()
                     content = f'f"{content}"'
                 
                 global_env = {"__builtins__": __builtins__}
                 global_env.update(self.variables)
                 result = eval(content, global_env, {})
-                
-                if isinstance(result, (int, float)):
-                    print(f"{C_NUMBER}{result}{RESET}")
-                else:
-                    print(f"{C_STRING}{result}{RESET}")
+                print(f"{C_STRING if isinstance(result, str) else C_NUMBER}{result}{RESET}")
             except Exception:
-                # फॉलबैक: अगर कुछ भी काम न करे तो सीधा वेरिएबल ढूंढो
                 content_clean = l[12:-1].strip().replace('"', '').replace("'", "")
                 if content_clean in self.variables:
                     val = self.variables[content_clean]
-                    if isinstance(val, (int, float)):
-                        print(f"{C_NUMBER}{val}{RESET}")
-                    else:
-                        print(f"{C_STRING}{val}{RESET}")
+                    print(f"{C_STRING if isinstance(val, str) else C_NUMBER}{val}{RESET}")
                 else:
                     print(f"{C_ERR}RuntimeError: Mismatched syntax token layer{RESET}")
 
     def start_repl(self):
         current_date = datetime.datetime.now().strftime("%b %d %Y, %H:%M:%S")
-        print(f"Nova 3.5.0 Core Compiler (tags/master:98d08f4, {current_date})")
+        print(f"Nova 3.5.0 Core Compiler (tags/master:e25bff1, {current_date})")
         print(f"[Clang 16.0.6 (Android Termux Shared Build)] on linux")
         print("Type \"help\", \"copyright\" or \"credits\" for more information.")
         print("Use \"RUN\" on a blank line to execute buffered blocks.\n")
@@ -103,19 +95,15 @@ class NovaEngine:
         buffer = []
         while True:
             try:
-                import re
                 prompt = f"{C_PROMPT}>>> {RESET}" if not buffer else ""
                 user_input = input(prompt)
-                
                 if user_input.strip() == "exit()":
                     break
-                
                 if user_input.strip() == "RUN":
                     for block_line in buffer:
                         self.execute_line(block_line)
                     buffer = []
                     continue
-                    
                 if user_input.strip():
                     buffer.append(user_input)
             except (KeyboardInterrupt, EOFError):
