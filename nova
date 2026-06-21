@@ -1,11 +1,12 @@
 #!/usr/bin/env python3
 import sys
+import datetime
 
-# Premium VS Code Dark+ Color Palette & 100% Italicized Text
+# Premium VS Code Dark+ Color Palette & Italicized Matrix
 C_PROMPT = "\033[1;35m"   # Deep Purple for >>>
 C_STRING = "\033[3;32m"   # Mint Green for Strings
 C_NUMBER = "\033[1;33m"   # Gold/Yellow for Numbers
-C_MODE = "\033[1;36m"     # Cyan for Mode Changes
+C_MODE = "\033[1;36m"     # Cyan for Systems
 C_ERR = "\033[1;31m"      # Crimson Red for Errors
 RESET = "\033[0m"
 
@@ -19,22 +20,32 @@ class NovaEngine:
         if not l or l.startswith("//"): 
             return
 
-        # 1. Pure Mode Shift (No AI text, just clean purple/cyan execution)
+        # 1. Mode Changer
         if l.startswith("NOVA.mode"):
             try:
                 mode_name = l.split("(")[1].split(")")[0].replace('"', '').replace("'", "")
                 self.current_mode = mode_name
-                print(f"{C_MODE}pipeline: {self.current_mode}{RESET}")
+                print(f"{C_MODE}# Pipeline configured: {self.current_mode}{RESET}")
             except:
                 print(f"{C_ERR}SyntaxError: Invalid mode format{RESET}")
 
-        # 2. Testing Mini AI Component (Clean, human-coded output)
-        elif l.startswith("NOVA.ai_query"):
+        # 2. IN-BUILT COMPACT AI PREDICTION ENGINE (Purescript Machine Learning Mock)
+        elif l.startswith("NOVA.ai_predict"):
             try:
+                # Extract input token inside the syntax
                 query = l.split("(")[1].split(")")[0].replace('"', '').replace("'", "")
-                print(f"{C_STRING}status: query processed successfully.{RESET}")
+                print(f"{C_MODE}[nova-ai] parsing neural shards...{RESET}")
+                
+                # Simple rule-based internal AI logic for testing
+                q_lower = query.lower()
+                if "health" in q_lower or "system" in q_lower:
+                    print(f"{C_STRING}AI Response: All matrix nodes are running at 98.4% efficiency.{RESET}")
+                elif "weather" in q_lower or "temp" in q_lower:
+                    print(f"{C_STRING}AI Response: Climate matrix optimal. No network disruptions predicted.{RESET}")
+                else:
+                    print(f"{C_STRING}AI Response: Token identified. Pattern matches human programming sequence.{RESET}")
             except:
-                print(f"{C_ERR}RuntimeError: Subsystem timeout{RESET}")
+                print(f"{C_ERR}RuntimeError: AI Subsystem network drop{RESET}")
 
         # 3. Variable Allocation Matrix
         elif "=" in l and not l.startswith("NOVA."):
@@ -49,7 +60,7 @@ class NovaEngine:
                 else:
                     self.variables[var_name] = var_val
 
-        # 4. Pure Visual Output Emitter
+        # 4. Output Emitter
         elif l.startswith("NOVA.output"):
             try:
                 content = l.split("(")[1].rstrip(")")
@@ -57,7 +68,6 @@ class NovaEngine:
                 global_env.update(self.variables)
                 result = eval(content, global_env, {})
                 
-                # Check if result is number or string to color it accordingly
                 if isinstance(result, (int, float)):
                     print(f"{C_NUMBER}{result}{RESET}")
                 else:
@@ -71,13 +81,19 @@ class NovaEngine:
                     else:
                         print(f"{C_STRING}{val}{RESET}")
                 else:
-                    print(f"{C_ERR}RuntimeError: Failed to resolve token{RESET}")
+                    print(f"{C_ERR}RuntimeError: Unresolved token header{RESET}")
 
     def start_repl(self):
+        # Python-like authentic version header metadata
+        current_date = datetime.datetime.now().strftime("%b %d %Y, %H:%M:%S")
+        print(f"Nova 3.5.0 Core Compiler (tags/master:d2585fc, {current_date})")
+        print(f"[Clang 16.0.6 (Android Termux Shared Build)] on linux")
+        print("Type \"help\", \"copyright\" or \"credits\" for more information.")
+        print("Use \"RUN\" on a blank line to execute buffered blocks.\n")
+        
         buffer = []
         while True:
             try:
-                # Python-like >>> prompt style
                 prompt = f"{C_PROMPT}>>> {RESET}" if not buffer else f"{C_PROMPT}... {RESET}"
                 user_input = input(prompt)
                 
