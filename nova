@@ -29,8 +29,8 @@ class NovaUltimateCompiler:
             elif l.startswith("NOVA.net_scan"):
                 target = re.findall(r'\"([^\"]+)\"', l)[0]
                 self.c.append(f'    printf("🔍 [AUDIT] Checking host availability for: {target}\\n");')
-                # कोट्स का झंझट खत्म - सिंगल कोट्स का इस्तेमाल
-                self.c.append(f"    system('ping -c 2 {target} > /dev/null && printf \"   🟢 [STATUS] Destination is Reachable\\n\" || printf \"   🔴 [STATUS] Destination Unreachable\\n\"');")
+                # \x22 का जादू - सी कंपाइलर के लिए एकदम क्लीन डबल कोट्स
+                self.c.append(f'    system("ping -c 2 {target} > /dev/null && printf \\x22   🟢 [STATUS] Destination is Reachable\\n\\x22 || printf \\x22   🔴 [STATUS] Destination Unreachable\\n\\x22");')
 
             elif l.startswith("NOVA.port_check"):
                 parts = l.split()
@@ -38,8 +38,8 @@ class NovaUltimateCompiler:
                     target_ip = parts[1].replace('"', '')
                     port = parts[2]
                     self.c.append(f'    printf("⚡ [PORT AUDIT] Scanning network accessibility on {target_ip} at Port {port}...\\n");')
-                    # यहाँ भी सिंगल कोट्स की वजह से क्लैंग एरर कभी नहीं आएगा
-                    self.c.append(f"    system('nc -zv -w 3 {target_ip} {port} > /dev/null 2>&1 && printf \"   🟢 Port {port} is OPEN\\n\" || printf \"   🔴 Port {port} is CLOSED or Filtered\\n\"');")
+                    # यहाँ भी \x22 की वजह से क्लैंग एकदम परफेक्ट बिल्ड करेगा
+                    self.c.append(f'    system("nc -zv -w 3 {target_ip} {port} > /dev/null 2>&1 && printf \\x22   🟢 Port {port} is OPEN\\n\\x22 || printf \\x22   🔴 Port {port} is CLOSED or Filtered\\n\\x22");')
 
             elif l.startswith("NOVA.output"):
                 if '"' in l:
@@ -62,7 +62,7 @@ class NovaUltimateCompiler:
             os.system(f"chmod +x {self.out}")
             print(f"🏆 [NOVA SUCCESS] Binary compiled successfully -> {self.out}")
         else:
-            print("🔴 [COMPILER ERROR] Clang build failed! Check quotes string mismatch.")
+            print("🔴 [COMPILER ERROR] Clang build failed! String mismatch.")
 
 if __name__ == "__main__":
     if len(sys.argv) > 1: 
