@@ -27,31 +27,35 @@ class NovaEngine:
             except:
                 print(f"{C_ERR}SyntaxError: Invalid mode format{RESET}")
 
-        # 1. LIVE INTERACTIVE AI METHOD (Asks for User Input Natively)
+        # UNLIMITED INTERACTIVE AI CHAT LOOP (Never drops until 'exit')
         elif l.startswith("NOVA.ai_chat"):
-            try:
-                # यूजर से लाइव इनपुट मांगना
-                print(f"{C_SYS}[nova-ai] Initializing neural prompt layer...{RESET}")
-                user_query = input(f"{C_SYS}nova-ai (query) > {RESET}")
-                
-                if not user_query.strip():
-                    print(f"{C_ERR}nova-ai > Input cannot be empty.{RESET}")
-                    return
+            print(f"{C_SYS}[nova-ai] Neural prompt layer engaged. Type 'exit' to return to compiler.{RESET}")
+            
+            while True:
+                try:
+                    user_query = input(f"{C_SYS}nova-ai (query) > {RESET}").strip()
                     
-                print(f"{C_SYS}[nova-ai] thinking...{RESET}")
-                
-                # लाइव इनपुट प्रोसेसिंग लॉजिक
-                q_lower = user_query.lower()
-                score = self.variables.get("current_score", 100)
-                
-                if "status" in q_lower or "check" in q_lower:
-                    print(f"{C_OUT}ai-response > Nodes active. Metrics index is at {score}. Protection level optimal.{RESET}")
-                elif "hello" in q_lower or "hi" in q_lower:
-                    print(f"{C_OUT}ai-response > Connection verified. Nova Human-Agent sync interface is live.{RESET}")
-                else:
-                    print(f"{C_OUT}ai-response > Core pattern matched. Log tokens cleared under execution block.{RESET}")
-            except (KeyboardInterrupt, EOFError):
-                print(f"\n{C_ERR}[nova-ai] Session interrupted.{RESET}")
+                    if user_query.lower() == "exit":
+                        print(f"{C_SYS}[nova-ai] Terminating AI layer. Shifting back to core...{RESET}")
+                        break
+                        
+                    if not user_query:
+                        continue
+                        
+                    print(f"{C_SYS}[nova-ai] thinking...{RESET}")
+                    q_lower = user_query.lower()
+                    score = self.variables.get("current_score", 100)
+                    
+                    if "status" in q_lower or "check" in q_lower:
+                        print(f"{C_OUT}ai-response > Nodes active. Metrics index is at {score}. Protection level optimal.{RESET}")
+                    elif "hello" in q_lower or "hi" in q_lower:
+                        print(f"{C_OUT}ai-response > Connection verified. Nova Human-Agent sync interface is live.{RESET}")
+                    else:
+                        print(f"{C_OUT}ai-response > Pattern processed. Diagnostic status remains active.{RESET}")
+                        
+                except (KeyboardInterrupt, EOFError):
+                    print(f"\n{C_ERR}[nova-ai] Resetting stream...{RESET}")
+                    break
 
         elif "=" in l and not l.startswith("NOVA."):
             parts = l.split("=")
@@ -81,7 +85,7 @@ class NovaEngine:
 
     def start_repl(self):
         current_date = datetime.datetime.now().strftime("%b %d %Y, %H:%M:%S")
-        print(f"Nova 5.0.0 Architecture Core ({current_date})")
+        print(f"Nova 5.5.0 Architecture Core ({current_date})")
         print("[Clang 16.0.6 Native Termux Build] on linux")
         print("Type \"exit()\" to terminate session. Use \"RUN\" to execute blocks.\n")
         
@@ -93,8 +97,7 @@ class NovaEngine:
                 
                 if user_input.strip() == "exit()":
                     break
-                    
-                # पेस्टिंग को होल्ड करने का लॉजिक (डबल न्यूलाइन चेक)
+                
                 if user_input.strip() == "RUN":
                     for block_line in buffer:
                         self.execute_line(block_line)
