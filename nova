@@ -10,7 +10,7 @@ class NovaUltimateCompiler:
         self.c.append("#include <stdlib.h>")
         self.c.append("#include <string.h>")
         self.c.append("int main() {")
-        self.c.append('    printf("🛡️ [NOVA SECURITY LAYER] Running System Integrity Checks...\\n\\n");')
+        self.c.append('    printf("📶 [NOVA WLAN DIAGNOSTICS] Checking Local Wi-Fi Network Shards...\\n\\n");')
 
     def compile(self):
         if not os.path.exists(self.src):
@@ -24,12 +24,11 @@ class NovaUltimateCompiler:
 
             if l.startswith("NOVA.mode"):
                 m = re.findall(r'\"([^\"]+)\"', l)[0]
-                self.c.append(f'    printf("🔮 [MODE] Current Core Mode: {m}\\n");')
+                self.c.append(f'    printf("🔮 [MODE] Core shifted to: {m}\\n");')
 
             elif l.startswith("NOVA.net_scan"):
                 target = re.findall(r'\"([^\"]+)\"', l)[0]
                 self.c.append(f'    printf("🔍 [AUDIT] Checking host availability for: {target}\\n");')
-                # \x22 का जादू - सी कंपाइलर के लिए एकदम क्लीन डबल कोट्स
                 self.c.append(f'    system("ping -c 2 {target} > /dev/null && printf \\x22   🟢 [STATUS] Destination is Reachable\\n\\x22 || printf \\x22   🔴 [STATUS] Destination Unreachable\\n\\x22");')
 
             elif l.startswith("NOVA.port_check"):
@@ -38,15 +37,22 @@ class NovaUltimateCompiler:
                     target_ip = parts[1].replace('"', '')
                     port = parts[2]
                     self.c.append(f'    printf("⚡ [PORT AUDIT] Scanning network accessibility on {target_ip} at Port {port}...\\n");')
-                    # यहाँ भी \x22 की वजह से क्लैंग एकदम परफेक्ट बिल्ड करेगा
                     self.c.append(f'    system("nc -zv -w 3 {target_ip} {port} > /dev/null 2>&1 && printf \\x22   🟢 Port {port} is OPEN\\n\\x22 || printf \\x22   🔴 Port {port} is CLOSED or Filtered\\n\\x22");')
+
+            # NEW: LIVE WI-FI DIAGNOSTICS COMMAND
+            elif l.startswith("NOVA.wifi_check"):
+                self.c.append('    printf("🔗 [WIFI-STATUS] Fetching Active Local Interface Data...\\n");')
+                # यह कमांड आपके टर्मक्स का लोकल आईपी और नेटवर्क गेटवे दिखाएगी
+                self.c.append('    system("ifconfig | grep -A 1 \'wlan0\' || ip route show | grep \'default\' | sed \'s/^/   /\'");')
+                self.c.append('    printf("📡 [SIGNALS] Checking local gateway routing speed...\\n");')
+                self.c.append('    system("ping -c 1 8.8.8.8 > /dev/null && printf \\x22   🟢 internet Connection: ACTIVE\\n\\x22 || printf \\x22   🔴 Internet Connection: OFFLINE\\n\\x22");')
 
             elif l.startswith("NOVA.output"):
                 if '"' in l:
                     m = re.findall(r'\"([^\"]+)\"', l)[0]
                     self.c.append(f'    printf("{m}\\n");')
 
-        self.c.append('    printf("\\n✅ [SYSTEM AUDIT] Network routine diagnostics finished successfully.\\n");')
+        self.c.append('    printf("\\n✅ [WLAN FINISHED] Diagnostics matrix completed successfully.\\n");')
         self.c.append("    return 0;")
         self.c.append("}")
         
@@ -60,9 +66,9 @@ class NovaUltimateCompiler:
             
         if build_res == 0:
             os.system(f"chmod +x {self.out}")
-            print(f"🏆 [NOVA SUCCESS] Binary compiled successfully -> {self.out}")
+            print(f"🏆 [NOVA SUCCESS] WiFi Diagnostic core locked -> {self.out}")
         else:
-            print("🔴 [COMPILER ERROR] Clang build failed! String mismatch.")
+            print("🔴 [COMPILER ERROR] Clang build failed!")
 
 if __name__ == "__main__":
     if len(sys.argv) > 1: 
