@@ -11,7 +11,6 @@ class NovaInterpreter:
         if not l or l.startswith("//"): 
             return
 
-        # 1. NOVA.mode Method Layer
         if l.startswith("NOVA.mode"):
             try:
                 mode_name = l.split("(")[1].split(")")[0].replace('"', '').replace("'", "")
@@ -20,23 +19,18 @@ class NovaInterpreter:
             except:
                 print("Syntax Error: Invalid NOVA.mode declaration.")
 
-        # 2. Variable Allocation Logic
         elif "=" in l and not l.startswith("NOVA."):
             parts = l.split("=")
             var_name = parts[0].strip()
             var_val = parts[1].strip()
-            
-            # String parsing
             if (var_val.startswith('"') and var_val.endswith('"')) or (var_val.startswith("'") and var_val.endswith("'")):
                 self.variables[var_name] = var_val[1:-1]
             else:
-                # Math evaluation
                 try:
                     self.variables[var_name] = eval(var_val, {}, self.variables)
                 except:
                     print(f"Runtime Error: Undefined allocation for '{var_name}'")
 
-        # 3. NOVA.output Engine
         elif l.startswith("NOVA.output"):
             try:
                 content = l.split("(")[1].split(")")[0].strip()
@@ -45,32 +39,41 @@ class NovaInterpreter:
                 elif content in self.variables:
                     print(self.variables[content])
                 else:
-                    # Direct expression evaluation inside print
                     print(eval(content, {}, self.variables))
             except:
                 print("Syntax Error: Invalid NOVA.output syntax.")
 
     def start_repl(self):
-        print("⚡ Nova Language Core Engine v2.0.0 (Interactive Shell)")
-        print("👉 Type 'exit()' to close the Nova shell.\n")
+        print("⚡ Nova Language Core Engine v2.1.0 (Interactive Shell)")
+        print("👉 Type 'exit()' to close. Type 'RUN' on a new line to execute pasted blocks.\n")
+        
+        buffer = []
         while True:
             try:
-                prompt = f"nova ({self.current_mode}) >>> "
+                prompt = f"nova ({self.current_mode}) >>> " if not buffer else "     ... "
                 user_input = input(prompt)
+                
                 if user_input.strip() == "exit()":
                     break
-                self.execute_line(user_input)
+                
+                if user_input.strip() == "RUN":
+                    print("\n🚀 [Executing Block...]")
+                    for block_line in buffer:
+                        self.execute_line(block_line)
+                    buffer = []
+                    print("✅ [Block Execution Finished]\n")
+                    continue
+                    
+                if user_input.strip():
+                    buffer.append(user_input)
+                else:
+                    # सिंगल लाइन एंटर मारने पर अगर बफर खाली है तो तुरंत रन करो
+                    if len(buffer) == 1:
+                        self.execute_line(buffer[0])
+                        buffer = []
             except (KeyboardInterrupt, EOFError):
                 print("\nExiting Nova Core.")
                 break
-
-    def run_file(self, filename):
-        if not os.path.exists(filename):
-            print(f"Error: File '{filename}' not found.")
-            return
-        with open(filename, "r") as f:
-            for line in f.readlines():
-                self.execute_line(line)
 
 if __name__ == "__main__":
     interpreter = NovaInterpreter()
