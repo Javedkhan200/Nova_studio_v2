@@ -47,7 +47,8 @@ class NovaEngine:
             var_name = parts[0].strip()
             var_val = parts[1].strip()
             try:
-                self.variables[var_name] = eval(var_val, {"str": str, "int": int, "float": float}, self.variables)
+                # Builtins स्कोप को ग्लोबल लेवल पर बाइंड किया
+                self.variables[var_name] = eval(var_val, {"__builtins__": __builtins__}, self.variables)
             except:
                 if (var_val.startswith('"') and var_val.endswith('"')) or (var_val.startswith("'") and var_val.endswith("'")):
                     self.variables[var_name] = var_val[1:-1]
@@ -57,7 +58,8 @@ class NovaEngine:
         elif l.startswith("NOVA.output"):
             try:
                 content = l.split("(")[1].rstrip(")")
-                global_env = {"str": str, "int": int, "float": float}
+                # यहाँ __builtins__ डालने से str(), int() सब कुछ नोवा के अंदर लाइव काम करेगा
+                global_env = {"__builtins__": __builtins__}
                 global_env.update(self.variables)
                 result = eval(content, global_env, {})
                 
@@ -78,7 +80,7 @@ class NovaEngine:
 
     def start_repl(self):
         current_date = datetime.datetime.now().strftime("%b %d %Y, %H:%M:%S")
-        print(f"Nova 3.5.0 Core Compiler (tags/master:0bd1ed4, {current_date})")
+        print(f"Nova 3.5.0 Core Compiler (tags/master:233fa0d, {current_date})")
         print(f"[Clang 16.0.6 (Android Termux Shared Build)] on linux")
         print("Type \"help\", \"copyright\" or \"credits\" for more information.")
         print("Use \"RUN\" on a blank line to execute buffered blocks.\n")
@@ -86,7 +88,6 @@ class NovaEngine:
         buffer = []
         while True:
             try:
-                # प्रॉम्प्ट स्ट्रिंग को कैरेक्टर ओवरलैप से बचाने के लिए एकदम क्लीन रखा
                 prompt = f"{C_PROMPT}>>> {RESET}" if not buffer else ""
                 user_input = input(prompt)
                 
