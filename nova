@@ -1,38 +1,33 @@
 #!/usr/bin/env python3
-import sys, re
+import sys
 
-# ANSI Formatting Classes - Premium VS Code & Java Italic Vibe
-C_BLUE = "\033[1;34m"
-C_CYAN = "\033[1;36m"
-C_GREEN = "\033[1;32m"
-C_YELLOW = "\033[1;33m"
-C_RED = "\033[1;31m"
-C_MAGENTA = "\033[1;35m"
-
-# ITALIC (Right side leaning text style like Java IDE)
-C_ITALIC = "\033[3m"
-C_RESET = "\033[0m"
+# Premium VS Code Standard Colors & Font Style Matrix
+FONT_SHELL = "\033[3;36m"     # Italic Bright Cyan for Prompts
+FONT_OUT = "\033[3;32m"       # Italic Soft Mint Green for User Output
+FONT_SYS = "\033[3;33m"       # Italic Gold for System Messages
+FONT_ERR = "\033[3;31m"       # Italic Crimson Red for Failures
+RESET = "\033[0m"
 
 class NovaInterpreter:
     def __init__(self):
         self.variables = {}
-        self.current_mode = "Default"
+        self.current_mode = "main"
 
     def execute_line(self, line):
         l = line.strip()
         if not l or l.startswith("//"): 
             return
 
-        # 1. NOVA.mode Parser (With Premium Italic Shift)
+        # 1. Native Mode Parser
         if l.startswith("NOVA.mode"):
             try:
                 mode_name = l.split("(")[1].split(")")[0].replace('"', '').replace("'", "")
                 self.current_mode = mode_name
-                print(f"{C_MAGENTA}{C_ITALIC}🔮 [NOVA Mode] Pipeline Shifted to: {self.current_mode}{C_RESET}")
+                print(f"{FONT_SYS}[nova-core] mode initialized: {self.current_mode}{RESET}")
             except:
-                print(f"{C_RED}Syntax Error: Invalid NOVA.mode declaration.{C_RESET}")
+                print(f"{FONT_ERR}SyntaxError: Invalid mode declaration{RESET}")
 
-        # 2. Advanced Variable Allocation & Casting Support
+        # 2. Variable Allocation Engine
         elif "=" in l and not l.startswith("NOVA."):
             parts = l.split("=")
             var_name = parts[0].strip()
@@ -45,43 +40,39 @@ class NovaInterpreter:
                 else:
                     self.variables[var_name] = var_val
 
-        # 3. ULTIMATE NOVA.output Engine (Supports dynamic str() conversion & Italic print)
+        # 3. Native Output Engine
         elif l.startswith("NOVA.output"):
             try:
                 content = l.split("(")[1].rstrip(")")
-                # Injection of safe context mapping (allows str() casting inside nova syntax)
                 context_env = {"str": str, "int": int}
                 context_env.update(self.variables)
                 
                 result = eval(content, {}, context_env)
-                # Printing in Premium Leaning Italic Green
-                print(f"{C_GREEN}{C_ITALIC}{result}{C_RESET}")
-            except Exception as e:
+                print(f"{FONT_OUT}{result}{RESET}")
+            except Exception:
                 content_clean = content.strip().replace('"', '').replace("'", "")
                 if content_clean in self.variables:
-                    print(f"{C_GREEN}{C_ITALIC}{self.variables[content_clean]}{C_RESET}")
+                    print(f"{FONT_OUT}{self.variables[content_clean]}{RESET}")
                 else:
-                    print(f"{C_RED}Runtime Error: Output syntax expression mismatch.{C_RESET}")
+                    print(f"{FONT_ERR}RuntimeError: Failed to resolve expression token{RESET}")
 
     def start_repl(self):
-        print(f"{C_CYAN}⚡ Nova Language Core Engine v2.8.0 (Java-Italic Virtual Environment){C_RESET}")
-        print(f"{C_YELLOW}👉 Enter 'exit()' to leave shell. Enter 'RUN' on a fresh line to compile blocks.{C_RESET}\n")
+        print(f"{FONT_SYS}Nova Core Environment [Version 2.9.0]{RESET}")
+        print(f"{FONT_SYS}Interactive REPL instance initialized. Use 'RUN' to compile.{RESET}\n")
         
         buffer = []
         while True:
             try:
-                prompt = f"{C_BLUE}nova ({self.current_mode}) >>> {C_RESET}" if not buffer else "     ... "
+                prompt = f"{FONT_SHELL}nova@{self.current_mode} > {RESET}" if not buffer else f"{FONT_SHELL}     ... {RESET}"
                 user_input = input(prompt)
                 
                 if user_input.strip() == "exit()":
                     break
                 
                 if user_input.strip() == "RUN":
-                    print(f"\n{C_CYAN}🚀 [Compiling Nova Script Tokens...]{C_RESET}")
                     for block_line in buffer:
                         self.execute_line(block_line)
                     buffer = []
-                    print(f"{C_CYAN}✅ [Script Execution Terminated Successfully]{C_RESET}\n")
                     continue
                     
                 if user_input.strip():
@@ -91,7 +82,6 @@ class NovaInterpreter:
                         self.execute_line(buffer[0])
                         buffer = []
             except (KeyboardInterrupt, EOFError):
-                print(f"\n{C_RED}Exiting Core Master Archive.{C_RESET}")
                 break
 
 if __name__ == "__main__":
