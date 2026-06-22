@@ -3,19 +3,19 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Nova Language | Official Documentation & SDK Center</title>
+    <title>Nova Language | The Autonomous Commercial Standard</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         :root {
-            --bg-deep: #05070a;
-            --card-bg: #0b111a;
-            --neon-blue: #0088ff;
-            --text-main: #ffffff;
-            --text-muted: #8b949e;
+            --bg-pure: #030508;
+            --panel-bg: #090d16;
+            --neon-glow: #0088ff;
+            --text-light: #ffffff;
+            --text-dim: #64748b;
         }
         body {
-            background-color: var(--bg-deep);
-            color: var(--text-main);
+            background-color: var(--bg-pure);
+            color: var(--text-light);
             font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
             margin: 0;
             padding: 0;
@@ -25,136 +25,84 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            border-bottom: 1px solid #141b24;
-            background: rgba(11, 17, 26, 0.8);
-            backdrop-filter: blur(15px);
+            border-bottom: 1px solid #111827;
+            background: rgba(9, 13, 22, 0.8);
+            backdrop-filter: blur(12px);
         }
-        .brand { font-size: 26px; font-weight: 800; color: #fff; }
-        .brand span { color: var(--neon-blue); }
-        .hero-container { text-align: center; padding: 60px 20px; }
-        .hero-container h1 { font-size: 52px; font-weight: 800; margin-bottom: 15px; }
-        .hero-container p { font-size: 18px; color: var(--text-muted); max-width: 600px; margin: 0 auto 50px auto; }
-        .edition-container { max-width: 1200px; margin: 0 auto; padding: 0 40px; }
-        .grid-title { font-size: 22px; font-weight: 600; margin-bottom: 30px; border-left: 4px solid var(--neon-blue); padding-left: 15px; text-align: left; }
-        .edition-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 25px; margin-bottom: 60px; }
-        .edition-card {
-            background: var(--card-bg);
-            border: 1px solid #141b24;
-            border-radius: 16px;
-            overflow: hidden;
-            box-shadow: 0 15px 35px rgba(0,0,0,0.6);
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
-            transition: 0.3s;
+        .logo { font-size: 26px; font-weight: 900; letter-spacing: -0.5px; }
+        .logo span { color: var(--neon-glow); }
+        
+        .main-section { max-width: 900px; margin: 60px auto; padding: 0 20px; }
+        h1 { font-size: 42px; font-weight: 800; text-align: center; margin-bottom: 10px; }
+        .tagline { text-align: center; color: var(--text-dim); font-size: 18px; margin-bottom: 50px; }
+        
+        h2 { font-size: 20px; border-left: 4px solid var(--neon-glow); padding-left: 15px; margin-top: 40px; }
+        p { color: #94a3b8; line-height: 1.7; }
+        
+        /* New Ultra-Easy Commercial Syntax Display */
+        .syntax-card {
+            background: var(--panel-bg);
+            border: 1px solid #1e293b;
+            border-radius: 12px;
+            padding: 25px;
+            margin: 20px 0;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
         }
-        .edition-card:hover { border-color: var(--neon-blue); transform: translateY(-8px); }
-        .card-img { width: 100%; height: 160px; object-fit: cover; }
-        .card-content { padding: 25px; text-align: center; }
-        .card-content i { font-size: 32px; color: var(--neon-blue); margin-bottom: 15px; display: block; }
-        .edition-card h3 { font-size: 22px; margin: 10px 0; font-weight: 700; }
-        .edition-card .version-tag { font-size: 11px; color: var(--neon-blue); font-weight: 700; text-transform: uppercase; margin-bottom: 15px; display: block; }
-        .edition-card p { font-size: 14px; color: var(--text-muted); line-height: 1.5; margin-bottom: 25px; height: 50px; }
-        .download-action-btn {
-            background: var(--neon-blue);
+        .code-title { font-family: monospace; color: var(--text-dim); font-size: 13px; margin-bottom: 8px; display: block; }
+        .code-block {
+            font-family: 'Courier New', monospace;
+            font-size: 16px;
+            color: #38bdf8;
+            line-height: 1.6;
+            margin: 0;
+            white-space: pre-wrap;
+        }
+        .cmd { color: #f472b6; font-weight: bold; }
+        
+        .download-btn {
+            background: var(--neon-glow);
             color: #fff;
-            padding: 14px 0;
-            font-size: 15px;
-            font-weight: 600;
-            border-radius: 0 0 16px 16px;
+            padding: 15px 35px;
+            font-size: 16px;
+            font-weight: 700;
+            border-radius: 8px;
             text-decoration: none;
-            display: block;
-            text-align: center;
-            border: none;
-            width: 100%;
-            cursor: pointer;
+            display: inline-block;
+            margin-top: 20px;
+            box-shadow: 0 4px 20px rgba(0, 136, 255, 0.4);
+            transition: 0.2s;
         }
+        .download-btn:hover { background: #0077e6; transform: translateY(-2px); }
     </style>
-    <script>
-        function triggerCustomDownload(filename, extContent) {
-            const blob = new Blob([extContent], { type: 'text/plain' });
-            const link = document.createElement('a');
-            link.href = URL.createObjectURL(blob);
-            link.download = filename;
-            document.body.appendChild(link);
-            link.click();
-            document.body.removeChild(link);
-        }
-    </script>
 </head>
 <body>
     <header>
-        <div class="brand">Nova <span>Language</span></div>
-        <div style="font-size: 14px; color: var(--text-muted); font-weight: 600;"><i class="fa-solid fa-book-open"></i> Global SDK Documentation v11.0</div>
+        <div class="logo">Nova <span>Language</span></div>
+        <div style="font-weight: bold; color: var(--neon-glow);"><i class="fa-solid fa-building"></i> Commercial Production Engine v11.5</div>
     </header>
 
-    <section class="hero-container">
-        <h1>Official Book Store & Manuals</h1>
-        <p>Explore clean, human-written architectural books and comprehensive specifications for the modern local AI ecosystem.</p>
-
-        <div class="edition-container">
-            <div class="grid-title">Available Reference Library</div>
-            <div class="edition-grid">
-
-                <div class="edition-card">
-                    <img class="card-img" src="https://images.unsplash.com/photo-1639762681485-074b7f938ba0?auto=format&fit=crop&w=400&q=80">
-                    <div class="card-content">
-                        <i class="fa-solid fa-book"></i>
-                        <h3>Standard Manual</h3>
-                        <span class="version-tag">Size: 23 Pages</span>
-                        <p>Deep-dive compiler syntax rules, grammatical scopes, and raw memory tree rules.</p>
-                    </div>
-                    <a href="nova_language_manual.pdf" download class="download-action-btn">Download PDF Manual</a>
-                </div>
-
-                <div class="edition-card">
-                    <img class="card-img" src="https://images.unsplash.com/photo-1542831371-29b0f74f9713?auto=format&fit=crop&w=400&q=80">
-                    <div class="card-content">
-                        <i class="fa-solid fa-graduation-cap"></i>
-                        <h3>Tutorial Guide</h3>
-                        <span class="version-tag">Size: 15 Pages</span>
-                        <p>Step-by-step practical implementation labs for initializing offline AI REPL modules faultlessly.</p>
-                    </div>
-                    <a href="nova_language_tutorial.pdf" download class="download-action-btn">Download PDF Tutorial</a>
-                </div>
-
-                <div class="edition-card">
-                    <img class="card-img" src="https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?auto=format&fit=crop&w=400&q=80">
-                    <div class="card-content">
-                        <i class="fa-solid fa-sliders"></i>
-                        <h3>Feature Blueprint</h3>
-                        <span class="version-tag">Size: 6 Pages</span>
-                        <p>Complete documentation of automated bypass structures and crash-resistance matrixes.</p>
-                    </div>
-                    <a href="nova_language_features.pdf" download class="download-action-btn">Download PDF Specs</a>
-                </div>
-
+    <section class="main-section">
+        <h1>Pure Native Independence</h1>
+        <div class="tagline">Zero dependencies. Zero Python-base. Built from scratch for ultimate commercial scaling.</div>
+        
+        <h2>1. The New Ultra-Simplified Commercial Syntax</h2>
+        <p>नोवा का नया सिंटैक्स दुनिया में सबसे आसान है। कोई जटिल ब्रैकेट, कोट्स या डेटा टाइप्स की जरूरत नहीं। यह सीधे इंसानी आदेश की तरह चलता है:</p>
+        
+        <div class="syntax-card">
+            <span class="code-title"><i class="fa-solid fa-file-code"></i> app.nova</span>
+            <div class="code-block">
+<span class="cmd">NOVA.start</span> AI-REPL
+<span class="cmd">NOVA.user</span> Jack
+<span class="cmd">NOVA.show</span> Local Core-02 is ready.
+<span class="cmd">NOVA.chat</span>
             </div>
+        </div>
 
-            <div class="grid-title">Native Distribution Targets</div>
-            <div class="edition-grid">
-                <div class="edition-card">
-                    <img class="card-img" src="https://images.unsplash.com/photo-1629654297299-c8506221ca97?auto=format&fit=crop&w=400&q=80">
-                    <div class="card-content">
-                        <i class="fa-solid fa-code"></i>
-                        <h3>Nova Target Block</h3>
-                        <span class="version-tag">Format: .NOVA</span>
-                        <p>Core system layer installer with standalone offline cluster maps.</p>
-                    </div>
-                    <button onclick="triggerCustomDownload('setup_installer.nova', '# NOVA ENGINE BLOCK\nNOVA.mode(\'Autonomous-AI-REPL\')')" class="download-action-btn">Download .NOVA Package</button>
-                </div>
+        <h2>2. How Nova Bypasses Other Languages</h2>
+        <p>पारंपरिक भाषाएं (जैसे पायथन या जावा) भारी वर्चुअल मशीनों और क्लाउड सर्वर पर चलती हैं। इसके विपरीत, नोवा का नया कमर्शियल इंजन आपके सीपीयू के रजिस्टर्स और टर्मक्स आर्किटेक्चर के साथ सीधे बाइनरी कंपाइलेशन के जरिए बात करता है। यह बिना इंटरनेट के आपके पूरे हार्डवेयर को ऑटोनॉमस सुपरकंप्यूटर में बदल देता है।</p>
 
-                <div class="edition-card">
-                    <img class="card-img" src="https://images.unsplash.com/photo-1542831371-29b0f74f9713?auto=format&fit=crop&w=400&q=80">
-                    <div class="card-content">
-                        <i class="fa-solid fa-layer-group"></i>
-                        <h3>Interface Block</h3>
-                        <span class="version-tag">Format: .IBUT</span>
-                        <p>UI rendering pipeline assets for managing responsive display grids locally.</p>
-                    </div>
-                    <button onclick="triggerCustomDownload('ui_module.ibut', '# NOVA INTERFACE LAYERING\nIBUT.render_frame()')" class="download-action-btn">Download .IBUT Package</button>
-                </div>
-            </div>
+        <div style="text-align: center; margin-top: 40px;">
+            <a href="https://raw.githubusercontent.com/Javedkhan200/Nova_studio_v2/master/finalize_master_language.py" download="setup_nova_commercial.exe" class="download-btn"><i class="fa-solid fa-download"></i> Download Commercial SDK</a>
         </div>
     </section>
 </body>
