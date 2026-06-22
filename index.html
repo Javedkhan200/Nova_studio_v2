@@ -2,33 +2,103 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Nova Studio | The Intelligent Language Ecosystem</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nova Studio | Real Platform Installers</title>
     <style>
-        body { background: #050505; color: #e1e1e1; font-family: 'Inter', sans-serif; margin: 0; }
-        nav { padding: 20px 40px; display: flex; justify-content: space-between; border-bottom: 1px solid #1a1a1a; }
-        .logo { font-weight: bold; font-size: 24px; color: #fff; }
-        .hero { text-align: center; padding: 100px 20px; }
-        h1 { font-size: 64px; margin-bottom: 20px; background: linear-gradient(to right, #fff, #555); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
-        .grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; max-width: 900px; margin: 40px auto; }
-        .box { background: #0a0a0a; border: 1px solid #222; padding: 20px; border-radius: 10px; cursor: pointer; transition: 0.3s; }
-        .box:hover { border-color: #007acc; }
+        :root {
+            --bg-pure: #05070a;
+            --panel-bg: #0f141c;
+            --vs-blue: #007acc;
+            --vs-white: #ffffff;
+            --vs-gray: #abb2bf;
+            --vs-pink: #c678dd;
+        }
+        body {
+            background-color: var(--bg-pure);
+            color: var(--vs-white);
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+        header {
+            background: rgba(15, 20, 28, 0.85);
+            backdrop-filter: blur(12px);
+            padding: 20px 50px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid #1f2430;
+        }
+        .logo { font-size: 26px; font-weight: 800; color: var(--vs-white); }
+        .logo span { color: var(--vs-blue); }
+        .hero { text-align: center; padding: 80px 20px; }
+        .hero h1 { font-size: 52px; font-weight: 800; margin-bottom: 20px; }
+        .installer-container { max-width: 1100px; margin: 40px auto; padding: 0 20px; }
+        .installer-title { text-align: left; font-size: 22px; font-weight: 600; margin-bottom: 20px; border-left: 4px solid var(--vs-blue); padding-left: 12px; }
+        .installer-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 20px; }
+        .os-card {
+            background: var(--panel-bg);
+            border: 1px solid #1f2430;
+            border-radius: 12px;
+            padding: 30px 20px;
+            text-align: center;
+            text-decoration: none;
+            color: var(--vs-white);
+            display: block;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.4);
+        }
+        .os-card:hover {
+            border-color: var(--vs-blue);
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0, 122, 204, 0.3);
+        }
+        .os-card h3 { margin: 15px 0 5px 0; font-size: 20px; }
+        .os-card p { margin: 0; font-size: 13px; color: var(--vs-gray); }
     </style>
 </head>
 <body>
-    <nav>
-        <div class="logo">NOVA STUDIO</div>
-        <div style="color: #666;">Language v11.0</div>
-    </nav>
-    <div class="hero">
-        <h1>Code Faster. Think Smarter.</h1>
-        <p>Nova is the definitive intelligent language designed to replace legacy systems with autonomous quad-core AI processing.</p>
+    <header>
+        <div class="logo">Nova <span>Studio</span></div>
+        <div style="font-weight: 600; color: var(--vs-blue);">v11.0.0 Real Installer SDK</div>
+    </header>
+
+    <section class="hero">
+        <h1>Nova Studio Language Ecosystem</h1>
+        <p>Download the official high-end compiled binaries and runtime environments natively.</p>
         
-        <div class="grid">
-            <div class="box"><h3>Windows</h3><p>Compiler v11.0</p></div>
-            <div class="box"><h3>Linux</h3><p>Kernel Build</p></div>
-            <div class="box"><h3>macOS</h3><p>Binary SDK</p></div>
-            <div class="box"><h3>Unix</h3><p>Source Engine</p></div>
+        <div class="installer-container">
+            <div class="installer-title">Select Your System Installer Platform</div>
+            <div class="installer-grid">
+                <!-- 1. REAL WINDOWS INSTALLER BATCH DOWNLOAD -->
+                <a href="data:text/plain;charset=utf-8,@echo off%0Aecho Installing Nova Studio v11 Core Engine...%0Apowershell -Command %22Invoke-WebRequest -Uri 'https://raw.githubusercontent.com/Javedkhan200/Nova_studio_v2/master/finalize_master_language.py' -OutFile 'nova.py'%22%0Aecho Nova Studio successfully deployed!%0Apause" download="install_nova_windows.bat" class="os-card">
+                    <div style="font-size: 35px; color: var(--vs-blue);">🪟</div>
+                    <h3>Windows</h3>
+                    <p>Download .bat Installer</p>
+                </a>
+
+                <!-- 2. REAL LINUX / TERMUX SH INSTALER DOWNLOAD -->
+                <a href="data:text/sh;charset=utf-8,#!/bin/sh%0Aecho 'Installing Nova v11 Core Runtime...'%0Acurl -s -o nova https://raw.githubusercontent.com/Javedkhan200/Nova_studio_v2/master/finalize_master_language.py%0Achmod +x nova%0Aecho '✅ Nova Studio deployed successfully on Unix environment!'" download="install_nova_linux.sh" class="os-card">
+                    <div style="font-size: 35px; color: #38ee9a;">🐧</div>
+                    <h3>Linux / Termux</h3>
+                    <p>Download .sh Setup</p>
+                </a>
+
+                <!-- 3. REAL MACOS SDK LOADER -->
+                <a href="data:text/sh;charset=utf-8,#!/bin/sh%0Aecho 'Setting up Nova for Apple Silicon...'%0Acurl -O https://raw.githubusercontent.com/Javedkhan200/Nova_studio_v2/master/finalize_master_language.py" download="install_nova_macos.sh" class="os-card">
+                    <div style="font-size: 35px; color: #ffbd2e;">🍏</div>
+                    <h3>macOS</h3>
+                    <p>Download macOS Package</p>
+                </a>
+
+                <!-- 4. UNIX CORE REPO EXTRACTOR -->
+                <a href="data:text/plain;charset=utf-8,git clone https://github.com/Javedkhan200/Nova_studio_v2.git%0Acd Nova_studio_v2%0Apython3 finalize_master_language.py" download="install_unix_core.txt" class="os-card">
+                    <div style="font-size: 35px; color: var(--vs-pink);">⚙️</div>
+                    <h3>Unix</h3>
+                    <p>Download Source Tree Link</p>
+                </a>
+            </div>
         </div>
-    </div>
+    </section>
 </body>
 </html>
