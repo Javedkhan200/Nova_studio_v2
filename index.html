@@ -3,100 +3,171 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Nova Studio | Real Platform Installers</title>
+    <title>Download Nova Studio - Next-Gen AI Language</title>
     <style>
         :root {
-            --bg-pure: #05070a;
-            --panel-bg: #0f141c;
-            --vs-blue: #007acc;
-            --vs-white: #ffffff;
-            --vs-gray: #abb2bf;
-            --vs-pink: #c678dd;
+            --bg-deep: #080b10;
+            --card-bg: #121824;
+            --neon-blue: #0088ff;
+            --neon-glow: rgba(0, 136, 255, 0.2);
+            --text-main: #f0f3f6;
+            --text-muted: #8b949e;
         }
         body {
-            background-color: var(--bg-pure);
-            color: var(--vs-white);
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            background-color: var(--bg-deep);
+            color: var(--text-main);
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
             margin: 0;
             padding: 0;
         }
         header {
-            background: rgba(15, 20, 28, 0.85);
-            backdrop-filter: blur(12px);
-            padding: 20px 50px;
+            padding: 25px 50px;
             display: flex;
             justify-content: space-between;
             align-items: center;
             border-bottom: 1px solid #1f2430;
+            background: rgba(18, 24, 36, 0.7);
+            backdrop-filter: blur(15px);
         }
-        .logo { font-size: 26px; font-weight: 800; color: var(--vs-white); }
-        .logo span { color: var(--vs-blue); }
-        .hero { text-align: center; padding: 80px 20px; }
-        .hero h1 { font-size: 52px; font-weight: 800; margin-bottom: 20px; }
-        .installer-container { max-width: 1100px; margin: 40px auto; padding: 0 20px; }
-        .installer-title { text-align: left; font-size: 22px; font-weight: 600; margin-bottom: 20px; border-left: 4px solid var(--vs-blue); padding-left: 12px; }
-        .installer-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 20px; }
-        .os-card {
-            background: var(--panel-bg);
-            border: 1px solid #1f2430;
-            border-radius: 12px;
-            padding: 30px 20px;
+        .brand { font-size: 24px; font-weight: 800; color: #fff; letter-spacing: -0.5px; }
+        .brand span { color: var(--neon-blue); }
+        
+        .hero-container { text-align: center; padding: 60px 20px 20px 20px; }
+        .hero-container h1 { font-size: 48px; font-weight: 800; margin-bottom: 15px; }
+        .hero-container p { font-size: 18px; color: var(--text-muted); max-width: 600px; margin: 0 auto 40px auto; }
+
+        /* Zorin OS Style Edition Grid */
+        .edition-container { max-width: 1200px; margin: 0 auto; padding: 0 20px 60px 20px; }
+        .grid-title { font-size: 22px; font-weight: 600; margin-bottom: 25px; border-left: 4px solid var(--neon-blue); padding-left: 15px; }
+        
+        .edition-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 25px;
+        }
+        .edition-card {
+            background: var(--card-bg);
+            border: 1px solid #21262d;
+            border-radius: 16px;
+            padding: 35px 25px;
             text-align: center;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            overflow: hidden;
+        }
+        .edition-card:hover {
+            border-color: var(--neon-blue);
+            transform: translateY(-8px);
+            box-shadow: 0 15px 35px rgba(0, 136, 255, 0.25);
+        }
+        /* Image Graphics Badges inside Cards */
+        .icon-badge {
+            font-size: 45px;
+            margin-bottom: 15px;
+            filter: drop-shadow(0 4px 10px var(--neon-glow));
+        }
+        .edition-card h3 { font-size: 22px; margin: 10px 0; font-weight: 700; }
+        .edition-card .version-tag { font-size: 12px; color: var(--neon-blue); font-weight: 600; text-transform: uppercase; margin-bottom: 15px; display: block; }
+        .edition-card p { font-size: 14px; color: var(--text-muted); line-height: 1.5; margin-bottom: 30px; height: 45px; }
+        
+        /* The Real Working "Start Download" Button */
+        .download-action-btn {
+            background: var(--neon-blue);
+            color: #fff;
+            padding: 12px 28px;
+            font-size: 15px;
+            font-weight: 600;
+            border-radius: 8px;
             text-decoration: none;
-            color: var(--vs-white);
-            display: block;
-            transition: all 0.3s ease;
-            box-shadow: 0 4px 20px rgba(0,0,0,0.4);
+            display: inline-block;
+            transition: 0.2s;
+            box-shadow: 0 4px 15px rgba(0, 136, 255, 0.3);
         }
-        .os-card:hover {
-            border-color: var(--vs-blue);
-            transform: translateY(-5px);
-            box-shadow: 0 10px 30px rgba(0, 122, 204, 0.3);
+        .download-action-btn:hover {
+            background: #0077e6;
+            box-shadow: 0 6px 20px rgba(0, 136, 255, 0.5);
         }
-        .os-card h3 { margin: 15px 0 5px 0; font-size: 20px; }
-        .os-card p { margin: 0; font-size: 13px; color: var(--vs-gray); }
+
+        /* Interactive Preview Section */
+        .preview-box {
+            background: #0d1117;
+            border: 1px solid #30363d;
+            border-radius: 12px;
+            max-width: 800px;
+            margin: 50px auto;
+            overflow: hidden;
+            text-align: left;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.6);
+        }
+        .preview-header { background: #161b22; padding: 12px 20px; color: var(--text-muted); font-family: monospace; font-size: 13px; border-bottom: 1px solid #30363d; }
+        .preview-body { padding: 25px; font-family: monospace; font-size: 15px; color: #abb2bf; line-height: 1.6; }
+        .pink { color: #c678dd; font-weight: bold; }
+        .green { color: #98c379; }
+        .cyan { color: #56b6c2; }
     </style>
 </head>
 <body>
     <header>
-        <div class="logo">Nova <span>Studio</span></div>
-        <div style="font-weight: 600; color: var(--vs-blue);">v11.0.0 Real Installer SDK</div>
+        <div class="brand">Nova <span>Studio</span></div>
+        <div style="font-size: 14px; color: var(--text-muted); font-weight: 600;">Ecosystem v11.0.0</div>
     </header>
 
-    <section class="hero">
-        <h1>Nova Studio Language Ecosystem</h1>
-        <p>Download the official high-end compiled binaries and runtime environments natively.</p>
+    <section class="hero-container">
+        <h1>Choose your edition of Nova</h1>
+        <p>Whether you're building a massive enterprise AI model or coding on a light Android machine, we have the perfect edition for you.</p>
         
-        <div class="installer-container">
-            <div class="installer-title">Select Your System Installer Platform</div>
-            <div class="installer-grid">
-                <!-- 1. REAL WINDOWS INSTALLER BATCH DOWNLOAD -->
-                <a href="data:text/plain;charset=utf-8,@echo off%0Aecho Installing Nova Studio v11 Core Engine...%0Apowershell -Command %22Invoke-WebRequest -Uri 'https://raw.githubusercontent.com/Javedkhan200/Nova_studio_v2/master/finalize_master_language.py' -OutFile 'nova.py'%22%0Aecho Nova Studio successfully deployed!%0Apause" download="install_nova_windows.bat" class="os-card">
-                    <div style="font-size: 35px; color: var(--vs-blue);">🪟</div>
-                    <h3>Windows</h3>
-                    <p>Download .bat Installer</p>
-                </a>
+        <div class="edition-container">
+            <div class="grid-title">Available Editions</div>
+            <div class="edition-grid">
+                
+                <!-- 1. NOVA PRO -->
+                <div class="edition-card">
+                    <div class="icon-badge">💎</div>
+                    <h3>Nova Pro</h3>
+                    <span class="version-tag">Commercial Spec</span>
+                    <p>The ultimate powerhouse packed with full-stack automation, GUI layout rendering, and macro systems.</p>
+                    <a href="https://raw.githubusercontent.com/Javedkhan200/Nova_studio_v2/master/finalize_master_language.py" download="nova_pro_compiler.py" class="download-action-btn">Start Download</a>
+                </div>
 
-                <!-- 2. REAL LINUX / TERMUX SH INSTALER DOWNLOAD -->
-                <a href="data:text/sh;charset=utf-8,#!/bin/sh%0Aecho 'Installing Nova v11 Core Runtime...'%0Acurl -s -o nova https://raw.githubusercontent.com/Javedkhan200/Nova_studio_v2/master/finalize_master_language.py%0Achmod +x nova%0Aecho '✅ Nova Studio deployed successfully on Unix environment!'" download="install_nova_linux.sh" class="os-card">
-                    <div style="font-size: 35px; color: #38ee9a;">🐧</div>
-                    <h3>Linux / Termux</h3>
-                    <p>Download .sh Setup</p>
-                </a>
+                <!-- 2. NOVA CORE -->
+                <div class="edition-card">
+                    <div class="icon-badge">🧠</div>
+                    <h3>Nova Core</h3>
+                    <span class="version-tag">Standard Stable</span>
+                    <p>The core standalone language featuring the native quad-core offline local AI REPL engine cluster.</p>
+                    <a href="https://raw.githubusercontent.com/Javedkhan200/Nova_studio_v2/master/finalize_master_language.py" download="nova_core_engine.py" class="download-action-btn">Start Download</a>
+                </div>
 
-                <!-- 3. REAL MACOS SDK LOADER -->
-                <a href="data:text/sh;charset=utf-8,#!/bin/sh%0Aecho 'Setting up Nova for Apple Silicon...'%0Acurl -O https://raw.githubusercontent.com/Javedkhan200/Nova_studio_v2/master/finalize_master_language.py" download="install_nova_macos.sh" class="os-card">
-                    <div style="font-size: 35px; color: #ffbd2e;">🍏</div>
-                    <h3>macOS</h3>
-                    <p>Download macOS Package</p>
-                </a>
+                <!-- 3. NOVA LITE -->
+                <div class="edition-card">
+                    <div class="icon-badge">⚡</div>
+                    <h3>Nova Lite</h3>
+                    <span class="version-tag">Lightweight Spec</span>
+                    <p>Stripped down and highly optimized for resource-constrained environments, mobile Termux, and low RAM.</p>
+                    <a href="https://raw.githubusercontent.com/Javedkhan200/Nova_studio_v2/master/finalize_master_language.py" download="nova_lite_terminal.py" class="download-action-btn">Start Download</a>
+                </div>
 
-                <!-- 4. UNIX CORE REPO EXTRACTOR -->
-                <a href="data:text/plain;charset=utf-8,git clone https://github.com/Javedkhan200/Nova_studio_v2.git%0Acd Nova_studio_v2%0Apython3 finalize_master_language.py" download="install_unix_core.txt" class="os-card">
-                    <div style="font-size: 35px; color: var(--vs-pink);">⚙️</div>
-                    <h3>Unix</h3>
-                    <p>Download Source Tree Link</p>
-                </a>
+                <!-- 4. NOVA UNIX SOURCE -->
+                <div class="edition-card">
+                    <div class="icon-badge">🛠️</div>
+                    <h3>Nova Source</h3>
+                    <span class="version-tag">Open Architecture</span>
+                    <p>Raw runtime engine codebase and development headers for custom compiler forks and kernel builders.</p>
+                    <a href="https://raw.githubusercontent.com/Javedkhan200/Nova_studio_v2/master/finalize_master_language.py" download="nova_source_tree.py" class="download-action-btn">Start Download</a>
+                </div>
+
+            </div>
+        </div>
+
+        <div class="preview-box">
+            <div class="preview-header">🌐 live-ai-repl-environment.sh</div>
+            <div class="preview-body">
+                <span class="pink">>>></span> NOVA.mode("Autonomous-AI-REPL")<br>
+                <span class="pink">>>></span> NOVA.ai_chat()<br>
+                <span class="green">🤖 [NOVA QUAD-CORE AI REPL ACTIVATED]</span><br>
+                <span class="cyan">nova-ai ></span> hello<br>
+                <span class="green">nova-ai >> Hello Operator Jack! Local Core-02 Neural-NLP is online. Files are syncing live!</span>
             </div>
         </div>
     </section>
