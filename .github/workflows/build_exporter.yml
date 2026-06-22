@@ -1,0 +1,22 @@
+name: Nova Multi-OS Global Exporter Pipeline
+
+on:
+  push:
+    branches: [ master ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout Code
+      uses: actions/checkout@v4
+
+    - name: Set up Python Environment
+      uses: actions/setup-python@v5
+      with:
+        python-version: '3.11'
+
+    - name: Core Exporter Verification
+      run: |
+        python3 finalize_master_language.py ai_test_code.nova
+        echo "🚀 Nova Framework Verified and Exported Safely!"
