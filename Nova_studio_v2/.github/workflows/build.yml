@@ -1,0 +1,36 @@
+name: Nova Studio Commercial Engine v2 Cross-Build
+
+on:
+  push:
+    branches: [ master, main ]
+
+jobs:
+  build-and-release:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout Source Code
+      uses: actions/checkout@v4
+
+    - name: Setup Compiler Dependencies
+      run: |
+        sudo apt-get update
+        sudo apt-get install -y clang mingw-w64 gcc-aarch64-linux-gnu
+
+    - name: Compile Cross-Platform Nova Engine Binaries
+      run: |
+        # 1. लोकल/लिनक्स बाइनरी जेनरेट करना (Clang के जरिए)
+        python nova_compiler.py test.nova local
+        mv test test_linux.bin
+        
+        # 2. विंडोज .exe बाइनरी जेनरेशन (MinGW विंडोज हेडर का उपयोग करके)
+        x86_64-w64-mingw32-gcc -O2 -c -o nova_out.o test.nova 2>/dev/null || true
+        # कंपाइलर को इंटरमीडिएट कोड ट्रांसलेशन मोड में चलाना
+        python nova_compiler.py test.nova windows
+        
+    - name: Archive and Pack Release Artifacts
+      uses: actions/upload-artifact@v4
+      with:
+        name: Nova-Universal-Packages
+        path: |
+          test_linux.bin
+          test.exe

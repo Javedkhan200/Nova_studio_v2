@@ -1,0 +1,7 @@
+NOVA.mode("Production")
+NOVA.allocate(a = 50)
+NOVA.allocate(b = 30)
+NOVA.allocate(total = a + b)
+NOVA.output("⚡ Short-cut test completed! Result is:")
+NOVA.output(total)
+
