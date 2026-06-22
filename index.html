@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Nova Studio | Official SDK Center</title>
+    <title>Nova Language | Official Documentation & SDK Center</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         :root {
@@ -34,9 +34,9 @@
         .hero-container { text-align: center; padding: 60px 20px; }
         .hero-container h1 { font-size: 52px; font-weight: 800; margin-bottom: 15px; }
         .hero-container p { font-size: 18px; color: var(--text-muted); max-width: 600px; margin: 0 auto 50px auto; }
-        .edition-container { max-width: 1200px; margin: 0 auto; padding: 0 20px; }
-        .grid-title { font-size: 22px; font-weight: 600; margin-bottom: 30px; border-left: 4px solid var(--neon-blue); padding-left: 15px; }
-        .edition-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 25px; }
+        .edition-container { max-width: 1200px; margin: 0 auto; padding: 0 40px; }
+        .grid-title { font-size: 22px; font-weight: 600; margin-bottom: 30px; border-left: 4px solid var(--neon-blue); padding-left: 15px; text-align: left; }
+        .edition-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 25px; margin-bottom: 60px; }
         .edition-card {
             background: var(--card-bg);
             border: 1px solid #141b24;
@@ -71,7 +71,6 @@
         }
     </style>
     <script>
-        // असली इंस्टॉलर जनरेट करने का जावास्क्रिप्ट कर्नल लॉजिक
         function triggerCustomDownload(filename, extContent) {
             const blob = new Blob([extContent], { type: 'text/plain' });
             const link = document.createElement('a');
@@ -85,40 +84,76 @@
 </head>
 <body>
     <header>
-        <div class="brand">Nova <span>Studio</span></div>
-        <div style="font-size: 14px; color: var(--text-muted); font-weight: 600;"><i class="fa-solid fa-cube"></i> SDK Environment v11.0</div>
+        <div class="brand">Nova <span>Language</span></div>
+        <div style="font-size: 14px; color: var(--text-muted); font-weight: 600;"><i class="fa-solid fa-book-open"></i> Global SDK Documentation v11.0</div>
     </header>
 
     <section class="hero-container">
-        <h1>Download Nova Packages</h1>
-        <p>Get the official verified intelligent language extensions for your compiler runtime setup.</p>
-        
+        <h1>Official Book Store & Manuals</h1>
+        <p>Explore clean, human-written architectural books and comprehensive specifications for the modern local AI ecosystem.</p>
+
         <div class="edition-container">
-            <div class="grid-title">Native Extension Files</div>
+            <div class="grid-title">Available Reference Library</div>
             <div class="edition-grid">
-                
+
                 <div class="edition-card">
                     <img class="card-img" src="https://images.unsplash.com/photo-1639762681485-074b7f938ba0?auto=format&fit=crop&w=400&q=80">
                     <div class="card-content">
-                        <i class="fa-solid fa-code"></i>
-                        <h3>Nova Core Setup</h3>
-                        <span class="version-tag">Extension: .NOVA</span>
-                        <p>Core autonomous environment script with embedded offline AI cluster configurations.</p>
+                        <i class="fa-solid fa-book"></i>
+                        <h3>Standard Manual</h3>
+                        <span class="version-tag">Size: 23 Pages</span>
+                        <p>Deep-dive compiler syntax rules, grammatical scopes, and raw memory tree rules.</p>
                     </div>
-                    <button onclick="triggerCustomDownload('setup_installer.nova', '# NOVA SYSTEM LAYER\nNOVA.mode(\'Autonomous-AI-REPL\')')" class="download-action-btn">Download .NOVA Package</button>
+                    <a href="nova_language_manual.pdf" download class="download-action-btn">Download PDF Manual</a>
+                </div>
+
+                <div class="edition-card">
+                    <img class="card-img" src="https://images.unsplash.com/photo-1542831371-29b0f74f9713?auto=format&fit=crop&w=400&q=80">
+                    <div class="card-content">
+                        <i class="fa-solid fa-graduation-cap"></i>
+                        <h3>Tutorial Guide</h3>
+                        <span class="version-tag">Size: 15 Pages</span>
+                        <p>Step-by-step practical implementation labs for initializing offline AI REPL modules faultlessly.</p>
+                    </div>
+                    <a href="nova_language_tutorial.pdf" download class="download-action-btn">Download PDF Tutorial</a>
                 </div>
 
                 <div class="edition-card">
                     <img class="card-img" src="https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?auto=format&fit=crop&w=400&q=80">
                     <div class="card-content">
-                        <i class="fa-solid fa-layer-group"></i>
-                        <h3>Nova Interface Loader</h3>
-                        <span class="version-tag">Extension: .IBUT</span>
-                        <p>UI rendering specification package for building interactive compiler frames and layouts.</p>
+                        <i class="fa-solid fa-sliders"></i>
+                        <h3>Feature Blueprint</h3>
+                        <span class="version-tag">Size: 6 Pages</span>
+                        <p>Complete documentation of automated bypass structures and crash-resistance matrixes.</p>
                     </div>
-                    <button onclick="triggerCustomDownload('ui_module.ibut', '# NOVA UI DESKTOP INTEGRATION\nIBUT.render_frame()')" class="download-action-btn">Download .IBUT Package</button>
+                    <a href="nova_language_features.pdf" download class="download-action-btn">Download PDF Specs</a>
                 </div>
 
+            </div>
+
+            <div class="grid-title">Native Distribution Targets</div>
+            <div class="edition-grid">
+                <div class="edition-card">
+                    <img class="card-img" src="https://images.unsplash.com/photo-1629654297299-c8506221ca97?auto=format&fit=crop&w=400&q=80">
+                    <div class="card-content">
+                        <i class="fa-solid fa-code"></i>
+                        <h3>Nova Target Block</h3>
+                        <span class="version-tag">Format: .NOVA</span>
+                        <p>Core system layer installer with standalone offline cluster maps.</p>
+                    </div>
+                    <button onclick="triggerCustomDownload('setup_installer.nova', '# NOVA ENGINE BLOCK\nNOVA.mode(\'Autonomous-AI-REPL\')')" class="download-action-btn">Download .NOVA Package</button>
+                </div>
+
+                <div class="edition-card">
+                    <img class="card-img" src="https://images.unsplash.com/photo-1542831371-29b0f74f9713?auto=format&fit=crop&w=400&q=80">
+                    <div class="card-content">
+                        <i class="fa-solid fa-layer-group"></i>
+                        <h3>Interface Block</h3>
+                        <span class="version-tag">Format: .IBUT</span>
+                        <p>UI rendering pipeline assets for managing responsive display grids locally.</p>
+                    </div>
+                    <button onclick="triggerCustomDownload('ui_module.ibut', '# NOVA INTERFACE LAYERING\nIBUT.render_frame()')" class="download-action-btn">Download .IBUT Package</button>
+                </div>
             </div>
         </div>
     </section>
