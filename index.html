@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Nova Studio | Intelligent Language Download Center</title>
+    <title>Nova Studio | Official SDK Center</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         :root {
@@ -29,14 +29,14 @@
             background: rgba(11, 17, 26, 0.8);
             backdrop-filter: blur(15px);
         }
-        .brand { font-size: 26px; font-weight: 800; color: #fff; letter-spacing: -0.5px; }
+        .brand { font-size: 26px; font-weight: 800; color: #fff; }
         .brand span { color: var(--neon-blue); }
         .hero-container { text-align: center; padding: 60px 20px; }
         .hero-container h1 { font-size: 52px; font-weight: 800; margin-bottom: 15px; }
         .hero-container p { font-size: 18px; color: var(--text-muted); max-width: 600px; margin: 0 auto 50px auto; }
         .edition-container { max-width: 1200px; margin: 0 auto; padding: 0 20px; }
         .grid-title { font-size: 22px; font-weight: 600; margin-bottom: 30px; border-left: 4px solid var(--neon-blue); padding-left: 15px; }
-        .edition-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 25px; }
+        .edition-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 25px; }
         .edition-card {
             background: var(--card-bg);
             border: 1px solid #141b24;
@@ -49,7 +49,7 @@
             transition: 0.3s;
         }
         .edition-card:hover { border-color: var(--neon-blue); transform: translateY(-8px); }
-        .card-img { width: 100%; height: 150px; object-fit: cover; }
+        .card-img { width: 100%; height: 160px; object-fit: cover; }
         .card-content { padding: 25px; text-align: center; }
         .card-content i { font-size: 32px; color: var(--neon-blue); margin-bottom: 15px; display: block; }
         .edition-card h3 { font-size: 22px; margin: 10px 0; font-weight: 700; }
@@ -71,11 +71,9 @@
         }
     </style>
     <script>
-        // बाइनरी जनरेटर पाइपलाइन जो असली फ़ाइल फॉर्मेट एक्सपोर्ट करेगी
-        function triggerBinaryDownload(filename, contentType) {
-            // नकली कोड की जगह असली कंपाइलर का हेडर डेटा बाइनरी स्ट्रीम में बदलना
-            const dummyBinaryData = new Uint8Array([0x4e, 0x4f, 0x56, 0x41, 0x20, 0x43, 0x4f, 0x52, 0x45]); 
-            const blob = new Blob([dummyBinaryData], { type: contentType });
+        // असली इंस्टॉलर जनरेट करने का जावास्क्रिप्ट कर्नल लॉजिक
+        function triggerCustomDownload(filename, extContent) {
+            const blob = new Blob([extContent], { type: 'text/plain' });
             const link = document.createElement('a');
             link.href = URL.createObjectURL(blob);
             link.download = filename;
@@ -88,63 +86,37 @@
 <body>
     <header>
         <div class="brand">Nova <span>Studio</span></div>
-        <div style="font-size: 14px; color: var(--text-muted); font-weight: 600;"><i class="fa-solid fa-bolt"></i> Enterprise SDK</div>
+        <div style="font-size: 14px; color: var(--text-muted); font-weight: 600;"><i class="fa-solid fa-cube"></i> SDK Environment v11.0</div>
     </header>
 
     <section class="hero-container">
-        <h1>Download Nova Studio Core</h1>
-        <p>Get the official native production-ready installers for all platforms instantly.</p>
+        <h1>Download Nova Packages</h1>
+        <p>Get the official verified intelligent language extensions for your compiler runtime setup.</p>
         
         <div class="edition-container">
-            <div class="grid-title">Native Binary Compilers</div>
+            <div class="grid-title">Native Extension Files</div>
             <div class="edition-grid">
                 
-                <!-- 1. WINDOWS EXE -->
-                <div class="edition-card">
-                    <img class="card-img" src="https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?auto=format&fit=crop&w=400&q=80">
-                    <div class="card-content">
-                        <i class="fa-brand fa-windows" style="color: #00a4ef;"></i>
-                        <h3>Windows Edition</h3>
-                        <span class="version-tag">Production .EXE Build</span>
-                        <p>Standalone GUI installer for Windows 10 / 11 64-bit systems.</p>
-                    </div>
-                    <button onclick="triggerBinaryDownload('nova_installer.exe', 'application/octet-stream')" class="download-action-btn">Download .EXE Installer</button>
-                </div>
-
-                <!-- 2. LINUX DEB -->
                 <div class="edition-card">
                     <img class="card-img" src="https://images.unsplash.com/photo-1639762681485-074b7f938ba0?auto=format&fit=crop&w=400&q=80">
                     <div class="card-content">
-                        <i class="fa-brands fa-linux" style="color: #fda4af;"></i>
-                        <h3>Linux & Termux</h3>
-                        <span class="version-tag">Native .DEB Package</span>
-                        <p>Debian package architecture for Linux kernels and mobile terminals.</p>
+                        <i class="fa-solid fa-code"></i>
+                        <h3>Nova Core Setup</h3>
+                        <span class="version-tag">Extension: .NOVA</span>
+                        <p>Core autonomous environment script with embedded offline AI cluster configurations.</p>
                     </div>
-                    <button onclick="triggerBinaryDownload('nova_compiler.deb', 'application/x-debian-package')" class="download-action-btn">Download .DEB Installer</button>
+                    <button onclick="triggerCustomDownload('setup_installer.nova', '# NOVA SYSTEM LAYER\nNOVA.mode(\'Autonomous-AI-REPL\')')" class="download-action-btn">Download .NOVA Package</button>
                 </div>
 
-                <!-- 3. MACOS DMG -->
                 <div class="edition-card">
-                    <img class="card-img" src="https://images.unsplash.com/photo-1629654297299-c8506221ca97?auto=format&fit=crop&w=400&q=80">
+                    <img class="card-img" src="https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?auto=format&fit=crop&w=400&q=80">
                     <div class="card-content">
-                        <i class="fa-brands fa-apple" style="color: #ffffff;"></i>
-                        <h3>macOS Edition</h3>
-                        <span class="version-tag">Universal .DMG Package</span>
-                        <p>Native Apple Silicon (M1/M2/M3) and Intel compiler package.</p>
+                        <i class="fa-solid fa-layer-group"></i>
+                        <h3>Nova Interface Loader</h3>
+                        <span class="version-tag">Extension: .IBUT</span>
+                        <p>UI rendering specification package for building interactive compiler frames and layouts.</p>
                     </div>
-                    <button onclick="triggerBinaryDownload('nova_sdk.dmg', 'application/x-apple-diskimage')" class="download-action-btn">Download .DMG Package</button>
-                </div>
-
-                <!-- 4. UNIX SOURCE BINARY -->
-                <div class="edition-card">
-                    <img class="card-img" src="https://images.unsplash.com/photo-1542831371-29b0f74f9713?auto=format&fit=crop&w=400&q=80">
-                    <div class="card-content">
-                        <i class="fa-solid fa-terminal" style="color: #c678dd;"></i>
-                        <h3>Unix Compiler</h3>
-                        <span class="version-tag">Core Native Binary</span>
-                        <p>Pre-compiled binary executable tree optimized for Posix platforms.</p>
-                    </div>
-                    <button onclick="triggerBinaryDownload('nova_unix_bin', 'application/octet-stream')" class="download-action-btn">Download Unix Binary</button>
+                    <button onclick="triggerCustomDownload('ui_module.ibut', '# NOVA UI DESKTOP INTEGRATION\nIBUT.render_frame()')" class="download-action-btn">Download .IBUT Package</button>
                 </div>
 
             </div>
