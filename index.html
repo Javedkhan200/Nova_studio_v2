@@ -3,23 +3,141 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Nova Studio v2 - Enterprise Edition</title>
+    <title>Nova Studio OS - The Next-Gen Language Ecosystem</title>
     <style>
-        body { background: #282c34; color: #abb2bf; font-family: 'Courier New', monospace; padding: 20px; }
-        .terminal { background: #21252b; border-left: 4px solid #c678dd; padding: 15px; border-radius: 5px; box-shadow: 0 4px 10px rgba(0,0,0,0.5); }
-        .prompt { color: #c678dd; font-weight: bold; }
+        :root {
+            --bg-dark: #0b0e14;
+            --panel-dark: #151a24;
+            --accent-blue: #007acc;
+            --accent-pink: #c678dd;
+            --text-light: #e6edf3;
+            --text-dim: #8b949e;
+        }
+        body {
+            background-color: var(--bg-dark);
+            color: var(--text-light);
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+        header {
+            background: rgba(21, 26, 36, 0.8);
+            backdrop-filter: blur(10px);
+            padding: 20px 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid #21262d;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        .logo-area {
+            font-size: 24px;
+            font-weight: bold;
+            background: linear-gradient(45deg, #61afef, #c678dd);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .hero-section {
+            text-align: center;
+            padding: 100px 20px;
+            background: radial-gradient(circle at center, #1f2430 0%, var(--bg-dark) 70%);
+        }
+        .hero-section h1 {
+            font-size: 52px;
+            margin-bottom: 20px;
+            font-weight: 800;
+            letter-spacing: -1px;
+        }
+        .hero-section p {
+            font-size: 20px;
+            color: var(--text-dim);
+            max-width: 700px;
+            margin: 0 auto 40px auto;
+            line-height: 1.6;
+        }
+        .cta-btn {
+            background: var(--accent-blue);
+            color: white;
+            padding: 14px 32px;
+            font-size: 18px;
+            font-weight: 600;
+            border-radius: 8px;
+            text-decoration: none;
+            box-shadow: 0 4px 15px rgba(0, 122, 204, 0.4);
+            transition: all 0.2s ease;
+        }
+        .cta-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(0, 122, 204, 0.6);
+        }
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+        .terminal-window {
+            background: #1e1e1e;
+            border: 1px solid #333;
+            border-radius: 12px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.6);
+            overflow: hidden;
+            margin-top: 40px;
+        }
+        .terminal-header {
+            background: #252526;
+            padding: 12px;
+            display: flex;
+            align-items: center;
+            border-bottom: 1px solid #2d2d2d;
+        }
+        .dot { width: 12px; height: 12px; border-radius: 5px; margin-right: 8px; }
+        .dot-red { background: #ff5f56; }
+        .dot-yellow { background: #ffbd2e; }
+        .dot-green { background: #27c93f; }
+        .terminal-title { margin: 0 auto; color: var(--text-dim); font-size: 14px; font-family: monospace; }
+        .terminal-body {
+            padding: 24px;
+            font-family: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, monospace;
+            font-size: 15px;
+            line-height: 1.6;
+            color: #abb2bf;
+            background: #21252b;
+        }
+        .prompt { color: var(--accent-pink); font-weight: bold; }
         .ai-tag { color: #61afef; }
-        .success { color: #98c379; }
-        .header { border-bottom: 1px solid #3e4451; padding-bottom: 10px; margin-bottom: 15px; color: #d19a66; }
+        .output-text { color: #98c379; }
     </style>
 </head>
 <body>
-    <div class="terminal">
-        <div class="header">Nova Studio Engine v11.0.0 [Production-Ready Commercial Build]</div>
-        <p><span class="prompt">>>></span> NOVA.mode("Autonomous-AI-REPL")</p>
-        <p><span class="prompt">>>></span> NOVA.ai_chat()</p>
-        <p class="success">🤖 [NOVA QUAD-CORE AI REPL ACTIVATED]</p>
-        <p><span class="ai-tag">nova-ai ></span> Hello Operator Jack! Local Core-02 Neural-NLP is online. Ready to build apps or compile custom kernels.</p>
-    </div>
+    <header>
+        <div class="logo-area">Nova Studio OS</div>
+        <nav><a href="#" class="cta-btn" style="padding: 8px 16px; font-size: 14px;">Download v11.0</a></nav>
+    </header>
+
+    <section class="hero-section">
+        <h1>An Advanced, Fast & Intelligent Language Ecosystem</h1>
+        <p>Nova Studio merges low-level OS compiling capabilities with local autonomous quad-core AI processing. Built for speed, security, and next-generation application development.</p>
+        <a href="#" class="cta-btn">Get Started Free</a>
+
+        <div class="container">
+            <div class="terminal-window">
+                <div class="terminal-header">
+                    <div class="dot dot-red"></div>
+                    <div class="dot dot-yellow"></div>
+                    <div class="dot dot-green"></div>
+                    <div class="terminal-title">nova-v11.0.0-repl.sh</div>
+                </div>
+                <div class="terminal-body" style="text-align: left;">
+                    <span class="prompt">>>></span> NOVA.mode("Autonomous-AI-REPL")<br>
+                    <span class="prompt">>>></span> NOVA.ai_chat()<br>
+                    <span class="output-text">🤖 [NOVA QUAD-CORE AI REPL ACTIVATED]</span><br>
+                    <span class="ai-tag">nova-ai ></span> Hello Operator Jack! Local Core-02 Neural-NLP is online.<br>
+                    <span class="ai-tag">nova-ai ></span> Ready to compile advanced kernels or build Android applications.
+                </div>
+            </div>
+        </div>
+    </section>
 </body>
 </html>
