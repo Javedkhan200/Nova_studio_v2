@@ -2,184 +2,33 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Nova Studio OS | The Next-Gen Language Ecosystem</title>
+    <title>Nova Studio | The Intelligent Language Ecosystem</title>
     <style>
-        :root {
-            --bg-pure: #05070a;
-            --panel-bg: #0f141c;
-            --vs-blue: #007acc;
-            --vs-white: #ffffff;
-            --vs-gray: #abb2bf;
-            --vs-pink: #c678dd;
-        }
-        body {
-            background-color: var(--bg-pure);
-            color: var(--vs-white);
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-            margin: 0;
-            padding: 0;
-        }
-        header {
-            background: rgba(15, 20, 28, 0.85);
-            backdrop-filter: blur(12px);
-            padding: 20px 50px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            border-bottom: 1px solid #1f2430;
-            position: sticky;
-            top: 0;
-            z-index: 100;
-        }
-        .logo {
-            font-size: 26px;
-            font-weight: 800;
-            color: var(--vs-white);
-            letter-spacing: -0.5px;
-        }
-        .logo span { color: var(--vs-blue); }
-        .hero {
-            text-align: center;
-            padding: 100px 20px 40px 20px;
-            background: radial-gradient(circle at top, #141b27 0%, var(--bg-pure) 80%);
-        }
-        .hero h1 {
-            font-size: 56px;
-            font-weight: 800;
-            margin-bottom: 20px;
-            letter-spacing: -1.5px;
-        }
-        .hero p {
-            font-size: 20px;
-            color: var(--vs-gray);
-            max-width: 650px;
-            margin: 0 auto 40px auto;
-            line-height: 1.6;
-        }
-        /* GUI OS Installer Interface */
-        .installer-container {
-            max-width: 1100px;
-            margin: 40px auto;
-            padding: 0 20px;
-        }
-        .installer-title {
-            text-align: left;
-            font-size: 22px;
-            font-weight: 600;
-            margin-bottom: 20px;
-            color: var(--vs-white);
-            border-left: 4px solid var(--vs-blue);
-            padding-left: 12px;
-        }
-        .installer-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-            gap: 20px;
-            margin-bottom: 60px;
-        }
-        .os-card {
-            background: var(--panel-bg);
-            border: 1px solid #1f2430;
-            border-radius: 12px;
-            padding: 30px 20px;
-            text-align: center;
-            text-decoration: none;
-            color: var(--vs-white);
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-            box-shadow: 0 4px 20px rgba(0,0,0,0.4);
-        }
-        .os-card:hover {
-            border-color: var(--vs-blue);
-            transform: translateY(-5px);
-            box-shadow: 0 10px 30px rgba(0, 122, 204, 0.3);
-            background: #131a26;
-        }
-        .os-card h3 { margin: 15px 0 5px 0; font-size: 20px; }
-        .os-card p { margin: 0; font-size: 13px; color: var(--vs-gray); }
-        /* Premium Terminal REPL Block */
-        .terminal-window {
-            background: #161b22;
-            border: 1px solid #30363d;
-            border-radius: 12px;
-            box-shadow: 0 25px 50px rgba(0,0,0,0.7);
-            overflow: hidden;
-            max-width: 900px;
-            margin: 40px auto;
-        }
-        .terminal-header {
-            background: #21262d;
-            padding: 12px 20px;
-            display: flex;
-            align-items: center;
-        }
-        .dot { width: 12px; height: 12px; border-radius: 5px; margin-right: 8px; }
-        .dot-r { background: #ff5f56; }
-        .dot-y { background: #ffbd2e; }
-        .dot-g { background: #27c93f; }
-        .title { margin: 0 auto; color: var(--vs-gray); font-size: 13px; font-family: monospace; }
-        .terminal-body {
-            padding: 25px;
-            font-family: "SFMono-Regular", Consolas, Menlo, monospace;
-            font-size: 15px;
-            line-height: 1.6;
-            background: #0d1117;
-            text-align: left;
-        }
-        .p-pink { color: var(--vs-pink); font-weight: bold; }
-        .p-cyan { color: #56b6c2; }
-        .p-green { color: #98c379; }
+        body { background: #050505; color: #e1e1e1; font-family: 'Inter', sans-serif; margin: 0; }
+        nav { padding: 20px 40px; display: flex; justify-content: space-between; border-bottom: 1px solid #1a1a1a; }
+        .logo { font-weight: bold; font-size: 24px; color: #fff; }
+        .hero { text-align: center; padding: 100px 20px; }
+        h1 { font-size: 64px; margin-bottom: 20px; background: linear-gradient(to right, #fff, #555); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        .grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; max-width: 900px; margin: 40px auto; }
+        .box { background: #0a0a0a; border: 1px solid #222; padding: 20px; border-radius: 10px; cursor: pointer; transition: 0.3s; }
+        .box:hover { border-color: #007acc; }
     </style>
 </head>
 <body>
-    <header>
-        <div class="logo">Nova <span>Studio OS</span></div>
-        <div style="font-weight: 600; color: var(--vs-blue);">v11.0.0 Global Rollout</div>
-    </header>
-
-    <section class="hero">
-        <h1>Nova Studio High-End Ecosystem</h1>
-        <p>A beautiful, break-resistant language combining native OS compilers with an integrated autonomous local quad-core AI engine cluster.</p>
+    <nav>
+        <div class="logo">NOVA STUDIO</div>
+        <div style="color: #666;">Language v11.0</div>
+    </nav>
+    <div class="hero">
+        <h1>Code Faster. Think Smarter.</h1>
+        <p>Nova is the definitive intelligent language designed to replace legacy systems with autonomous quad-core AI processing.</p>
         
-        <div class="installer-container">
-            <div class="installer-title">Select Your System Installer Platform</div>
-            <div class="installer-grid">
-                <a href="#" class="os-card" onclick="alert('Starting Windows GUI Installer download...')">
-                    <div style="font-size: 35px; color: var(--vs-blue);">🪟</div>
-                    <h3>Windows</h3>
-                    <p>Production .exe Build</p>
-                </a>
-                <a href="#" class="os-card" onclick="alert('Starting Linux Terminal Package download...')">
-                    <div style="font-size: 35px; color: #38ee9a;">🐧</div>
-                    <h3>Linux</h3>
-                    <p>DEB / RPM / Termux Architecture</p>
-                </a>
-                <a href="#" class="os-card" onclick="alert('Starting macOS Container download...')">
-                    <div style="font-size: 35px; color: #ffbd2e;">🍏</div>
-                    <h3>macOS</h3>
-                    <p>Universal Binary (M1/M2/Intel)</p>
-                </a>
-                <a href="#" class="os-card" onclick="alert('Starting Unix Shell Source package download...')">
-                    <div style="font-size: 35px; color: var(--vs-pink);">⚙️</div>
-                    <h3>Unix</h3>
-                    <p>Posix C++ Core Engine Source</p>
-                </a>
-            </div>
+        <div class="grid">
+            <div class="box"><h3>Windows</h3><p>Compiler v11.0</p></div>
+            <div class="box"><h3>Linux</h3><p>Kernel Build</p></div>
+            <div class="box"><h3>macOS</h3><p>Binary SDK</p></div>
+            <div class="box"><h3>Unix</h3><p>Source Engine</p></div>
         </div>
-
-        <div class="terminal-window">
-            <div class="terminal-header">
-                <div class="dot dot-r"></div><div class="dot dot-y"></div><div class="dot dot-g"></div>
-                <div class="title">nova-v11-local-ai-repl.sh</div>
-            </div>
-            <div class="terminal-body">
-                <span class="p-pink">>>></span> NOVA.mode("Autonomous-AI-REPL")<br>
-                <span class="p-pink">>>></span> NOVA.ai_chat()<br>
-                <span class="p-green">🤖 [NOVA QUAD-CORE AI REPL ACTIVATED]</span><br>
-                <span class="p-cyan">nova-ai ></span> hello<br>
-                <span class="p-green">nova-ai >> Hello Operator Jack! Local Core-02 Neural-NLP is online. Ready to build apps or compile custom kernels for you.</span>
-            </div>
-        </div>
-    </section>
+    </div>
 </body>
 </html>
