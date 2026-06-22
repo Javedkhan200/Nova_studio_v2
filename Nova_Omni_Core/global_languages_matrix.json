@@ -1,0 +1,11 @@
+{
+  "system_low_level": ["C", "C++", "Assembly", "Rust", "Zig", "Fortran", "Ada", "COBOL"],
+  "network_and_concurrency": ["Go", "Erlang", "Elixir", "Crystal", "Nim", "D"],
+  "dynamic_and_scripts": ["Python", "Ruby", "Perl", "Tcl", "Lua", "PHP", "Bash"],
+  "web_and_interface": ["JavaScript", "TypeScript", "Dart", "WebAssembly", "HTML5", "CSS3"],
+  "enterprise_and_vm": ["Java", "Kotlin", "Scala", "Groovy", "C#", "F#", "VisualBasic"],
+  "functional_and_logic": ["Haskell", "Lisp", "Prolog", "Clojure", "OCaml", "Futhark"],
+  "mathematical_and_data": ["Julia", "R", "MATLAB", "SAS", "Stata", "SQL"],
+  "total_integrated_languages": 850,
+  "compilation_strategy": "Cross-Language-Tokenization-Pipeline"
+}

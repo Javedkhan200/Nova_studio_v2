@@ -1,0 +1,7 @@
+// Nova WiFi Analyzer
+NOVA.mode("Local-Network-Check")
+
+// सीधे आपके वाई-फाई का लाइव स्टेटस चेक करेगा
+NOVA.wifi_check()
+
+

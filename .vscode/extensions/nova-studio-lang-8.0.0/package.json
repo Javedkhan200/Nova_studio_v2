@@ -1,0 +1,36 @@
+{
+    "name": "nova-studio-lang",
+    "displayName": "Nova Studio Language Support",
+    "description": "Official Commercial Kernel and Textmate Grammar Support for the Nova Programming Language.",
+    "version": "8.0.0",
+    "publisher": "NovaStudio",
+    "engines": {
+        "vscode": "^1.60.0"
+    },
+    "categories": [
+        "Programming Languages"
+    ],
+    "icon": "img/nova_logo.png",
+    "contributes": {
+        "languages": [
+            {
+                "id": "nova",
+                "aliases": [
+                    "Nova",
+                    "nova"
+                ],
+                "extensions": [
+                    ".nova"
+                ],
+                "configuration": "./language-configuration.json"
+            }
+        ],
+        "grammars": [
+            {
+                "language": "nova",
+                "scopeName": "source.nova",
+                "path": "./syntaxes/nova.tmLanguage.json"
+            }
+        ]
+    }
+}

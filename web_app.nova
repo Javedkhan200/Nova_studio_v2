@@ -1,0 +1,10 @@
+// नोवा नेटिव वेरिएबल्स
+NOVA.var site_title = "Jack Master Studio"
+
+NOVA.output("Baking native web layout...")
+// नोवा नेटिव वेब इंजन
+NOVA.create_web(title: "Jack Studio v2", heading: "NOVA CORE ENGINE v2")
+
+NOVA.output("Launching web node on port 8080...")
+// नोवा नेटिव सर्वर कमांड
+NOVA.start_server(port: 8080)

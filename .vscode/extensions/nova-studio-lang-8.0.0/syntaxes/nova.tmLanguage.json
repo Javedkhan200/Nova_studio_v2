@@ -1,0 +1,48 @@
+{
+    "$schema": "https://raw.githubusercontent.com/martinring/tmlanguage/master/tmlanguage.json",
+    "name": "Nova Language",
+    "patterns": [
+        {
+            "include": "#keywords"
+        },
+        {
+            "include": "#strings"
+        },
+        {
+            "include": "#comments"
+        }
+    ],
+    "repository": {
+        "keywords": {
+            "patterns": [
+                {
+                    "name": "keyword.control.nova",
+                    "match": "\\b(NOVA\\.mode|NOVA\\.compile_os|NOVA\\.render_gui|NOVA\\.ai_chat|NOVA\\.output|NOVA\\.solve|RUN)\\b"
+                }
+            ]
+        },
+        "strings": {
+            "patterns": [
+                {
+                    "name": "string.quoted.double.nova",
+                    "begin": "\"",
+                    "end": "\""
+                },
+                {
+                    "name": "string.quoted.single.nova",
+                    "begin": "'",
+                    "end": "'"
+                }
+            ]
+        },
+        "comments": {
+            "patterns": [
+                {
+                    "name": "comment.line.double-slash.nova",
+                    "match": "//.*$"
+                }
+            ]
+        }
+    },
+    "scopeName": "source.nova"
+}
